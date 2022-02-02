@@ -13,23 +13,18 @@ using Unity;
 
 namespace CarFactoryView
 {
-    public partial class FormCars : Form
+    public partial class FormWarehouses : Form
     {
-        private readonly ICarLogic logic;
-        public FormCars(ICarLogic logic)
+        private readonly IWarehouseLogic logic;
+        public FormWarehouses(IWarehouseLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
         }
 
-        private void FormCars_Load(object sender, EventArgs e)
-        {
-            LoadData();
-        }
-
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormCar>();
+            var form = Program.Container.Resolve<FormWarehouse>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -40,7 +35,7 @@ namespace CarFactoryView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Program.Container.Resolve<FormCar>();
+                var form = Program.Container.Resolve<FormWarehouse>();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -51,6 +46,7 @@ namespace CarFactoryView
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+
             if (dataGridView.SelectedRows.Count == 1)
             {
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
@@ -59,7 +55,7 @@ namespace CarFactoryView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new CarBindingModel { Id = id });
+                        logic.Delete(new WarehouseBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
@@ -76,6 +72,10 @@ namespace CarFactoryView
             LoadData();
         }
 
+        private void FormWarehouses_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
         private void LoadData()
         {
             try
@@ -85,7 +85,7 @@ namespace CarFactoryView
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[3].Visible = false;
+                    dataGridView.Columns[4].Visible = false;
                     dataGridView.Columns[1].AutoSizeMode =
                         DataGridViewAutoSizeColumnMode.Fill;
                 }
@@ -95,11 +95,6 @@ namespace CarFactoryView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-        }
-
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

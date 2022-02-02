@@ -123,5 +123,17 @@ namespace CarFactoryView
             var form = Program.Container.Resolve<FormCars>();
             form.ShowDialog();
         }
+
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormWarehouses>();
+            form.ShowDialog();
+        }
+
+        private void пополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormWarehouseAddComponent>();
+            form.ShowDialog();
+        }
     }
 }

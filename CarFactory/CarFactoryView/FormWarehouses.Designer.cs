@@ -1,7 +1,7 @@
 ﻿
 namespace CarFactoryView
 {
-    partial class FormCars
+    partial class FormWarehouses
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@ namespace CarFactoryView
             this.buttonUpdate.Location = new System.Drawing.Point(554, 122);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
-            this.buttonUpdate.TabIndex = 9;
+            this.buttonUpdate.TabIndex = 14;
             this.buttonUpdate.Text = "Обновить";
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
@@ -52,7 +52,7 @@ namespace CarFactoryView
             this.buttonDelete.Location = new System.Drawing.Point(554, 93);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
-            this.buttonDelete.TabIndex = 8;
+            this.buttonDelete.TabIndex = 13;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
@@ -62,7 +62,7 @@ namespace CarFactoryView
             this.buttonChange.Location = new System.Drawing.Point(554, 64);
             this.buttonChange.Name = "buttonChange";
             this.buttonChange.Size = new System.Drawing.Size(75, 23);
-            this.buttonChange.TabIndex = 7;
+            this.buttonChange.TabIndex = 12;
             this.buttonChange.Text = "Изменить";
             this.buttonChange.UseVisualStyleBackColor = true;
             this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
@@ -72,7 +72,7 @@ namespace CarFactoryView
             this.buttonAdd.Location = new System.Drawing.Point(554, 35);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttonAdd.TabIndex = 6;
+            this.buttonAdd.TabIndex = 11;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -85,22 +85,21 @@ namespace CarFactoryView
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 25;
             this.dataGridView.Size = new System.Drawing.Size(516, 426);
-            this.dataGridView.TabIndex = 5;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
+            this.dataGridView.TabIndex = 10;
             // 
-            // FormCars
+            // FormWarehouses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 450);
+            this.ClientSize = new System.Drawing.Size(647, 450);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonChange);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView);
-            this.Name = "FormCars";
-            this.Text = "Машины";
-            this.Load += new System.EventHandler(this.FormCars_Load);
+            this.Name = "FormWarehouses";
+            this.Text = "Склады";
+            this.Load += new System.EventHandler(this.FormWarehouses_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
