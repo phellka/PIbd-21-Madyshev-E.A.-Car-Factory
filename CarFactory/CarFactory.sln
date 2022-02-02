@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarFactoryView", "CarFactoryView\CarFactoryView.csproj", "{9E034E3E-719E-4E86-A8CE-E8A42B2B462D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarFactoryContracts", "CarFactoryContracts\CarFactoryContracts.csproj", "{B8FFE2C7-0556-4A38-8BB1-434984787BAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarFactoryBusinessLogic", "CarFactoryBusinessLogic\CarFactoryBusinessLogic.csproj", "{BA1399C6-F382-46DD-B5C3-E11F0A0EF4F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarFactoryListImplement", "CarFactoryListImplement\CarFactoryListImplement.csproj", "{612D0CA2-9233-48F2-8572-5EFCFC738821}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{9E034E3E-719E-4E86-A8CE-E8A42B2B462D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E034E3E-719E-4E86-A8CE-E8A42B2B462D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E034E3E-719E-4E86-A8CE-E8A42B2B462D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8FFE2C7-0556-4A38-8BB1-434984787BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8FFE2C7-0556-4A38-8BB1-434984787BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8FFE2C7-0556-4A38-8BB1-434984787BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8FFE2C7-0556-4A38-8BB1-434984787BAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA1399C6-F382-46DD-B5C3-E11F0A0EF4F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1399C6-F382-46DD-B5C3-E11F0A0EF4F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1399C6-F382-46DD-B5C3-E11F0A0EF4F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1399C6-F382-46DD-B5C3-E11F0A0EF4F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{612D0CA2-9233-48F2-8572-5EFCFC738821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{612D0CA2-9233-48F2-8572-5EFCFC738821}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{612D0CA2-9233-48F2-8572-5EFCFC738821}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{612D0CA2-9233-48F2-8572-5EFCFC738821}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
