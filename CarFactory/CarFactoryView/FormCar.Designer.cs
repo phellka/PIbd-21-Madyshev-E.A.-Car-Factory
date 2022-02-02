@@ -144,6 +144,7 @@ namespace CarFactoryView
             this.ComponentCount});
             this.dataGridView.Location = new System.Drawing.Point(6, 22);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 25;
             this.dataGridView.Size = new System.Drawing.Size(425, 150);
             this.dataGridView.TabIndex = 0;
@@ -152,17 +153,20 @@ namespace CarFactoryView
             // 
             this.ComponentId.HeaderText = "ComponentId";
             this.ComponentId.Name = "ComponentId";
+            this.ComponentId.ReadOnly = true;
             this.ComponentId.Visible = false;
             // 
             // NameComponent
             // 
             this.NameComponent.HeaderText = "Компонент";
             this.NameComponent.Name = "NameComponent";
+            this.NameComponent.ReadOnly = true;
             // 
             // ComponentCount
             // 
             this.ComponentCount.HeaderText = "Количество";
             this.ComponentCount.Name = "ComponentCount";
+            this.ComponentCount.ReadOnly = true;
             // 
             // buttonSave
             // 

@@ -84,13 +84,21 @@ namespace CarFactoryView
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
-            List<CarViewModel> list = logicCar.Read(null);
-            if (list != null)
+            try
             {
-                comboBoxCars.DisplayMember = "CarName";
-                comboBoxCars.DisplayMember = "Id";
-                comboBoxCars.DataSource = list;
-                comboBoxCars.SelectedItem = null;
+                List<CarViewModel> list = logicCar.Read(null);
+                if (list != null)
+                {
+                    comboBoxCars.DisplayMember = "CarName";
+                    comboBoxCars.DisplayMember = "Id";
+                    comboBoxCars.DataSource = list;
+                    comboBoxCars.SelectedItem = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
