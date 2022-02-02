@@ -120,7 +120,7 @@ namespace CarFactoryView
 
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormCar>();
+            var form = Program.Container.Resolve<FormCars>();
             form.ShowDialog();
         }
     }
