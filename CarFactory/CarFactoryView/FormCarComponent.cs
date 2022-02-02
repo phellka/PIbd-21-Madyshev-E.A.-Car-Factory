@@ -56,11 +56,6 @@ namespace CarFactoryView
             Close();
         }
 
-        private void FormProductComponent_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;

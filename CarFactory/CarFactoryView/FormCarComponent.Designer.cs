@@ -103,7 +103,6 @@ namespace CarFactoryView
             this.Controls.Add(this.labelComponents);
             this.Name = "FormCarComponent";
             this.Text = "Компонент изделия";
-            this.Load += new System.EventHandler(this.FormProductComponent_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
