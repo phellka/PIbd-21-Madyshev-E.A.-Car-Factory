@@ -34,16 +34,16 @@ namespace CarFactoryView
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.groupBoxComponents = new System.Windows.Forms.GroupBox();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonChange = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonChange = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.ComponentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameComponent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ComponentCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBoxComponents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -94,38 +94,15 @@ namespace CarFactoryView
             this.groupBoxComponents.TabStop = false;
             this.groupBoxComponents.Text = "Компоненты";
             // 
-            // dataGridView
+            // buttonUpdate
             // 
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ComponentId,
-            this.NameComponent,
-            this.ComponentCount});
-            this.dataGridView.Location = new System.Drawing.Point(6, 22);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowTemplate.Height = 25;
-            this.dataGridView.Size = new System.Drawing.Size(425, 150);
-            this.dataGridView.TabIndex = 0;
-            // 
-            // buttonAdd
-            // 
-            this.buttonAdd.Location = new System.Drawing.Point(463, 31);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttonAdd.TabIndex = 1;
-            this.buttonAdd.Text = "Добавить";
-            this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
-            // 
-            // buttonChange
-            // 
-            this.buttonChange.Location = new System.Drawing.Point(463, 60);
-            this.buttonChange.Name = "buttonChange";
-            this.buttonChange.Size = new System.Drawing.Size(75, 23);
-            this.buttonChange.TabIndex = 2;
-            this.buttonChange.Text = "Изменить";
-            this.buttonChange.UseVisualStyleBackColor = true;
-            this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
+            this.buttonUpdate.Location = new System.Drawing.Point(463, 118);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonUpdate.TabIndex = 4;
+            this.buttonUpdate.Text = "Обновить";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // buttonDelete
             // 
@@ -137,15 +114,55 @@ namespace CarFactoryView
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
-            // buttonUpdate
+            // buttonChange
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(463, 118);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
-            this.buttonUpdate.TabIndex = 4;
-            this.buttonUpdate.Text = "Обновить";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            this.buttonChange.Location = new System.Drawing.Point(463, 60);
+            this.buttonChange.Name = "buttonChange";
+            this.buttonChange.Size = new System.Drawing.Size(75, 23);
+            this.buttonChange.TabIndex = 2;
+            this.buttonChange.Text = "Изменить";
+            this.buttonChange.UseVisualStyleBackColor = true;
+            this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(463, 31);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.TabIndex = 1;
+            this.buttonAdd.Text = "Добавить";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ComponentId,
+            this.NameComponent,
+            this.ComponentCount});
+            this.dataGridView.Location = new System.Drawing.Point(6, 22);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.RowTemplate.Height = 25;
+            this.dataGridView.Size = new System.Drawing.Size(425, 150);
+            this.dataGridView.TabIndex = 0;
+            // 
+            // ComponentId
+            // 
+            this.ComponentId.HeaderText = "ComponentId";
+            this.ComponentId.Name = "ComponentId";
+            this.ComponentId.Visible = false;
+            // 
+            // NameComponent
+            // 
+            this.NameComponent.HeaderText = "Компонент";
+            this.NameComponent.Name = "NameComponent";
+            // 
+            // ComponentCount
+            // 
+            this.ComponentCount.HeaderText = "Количество";
+            this.ComponentCount.Name = "ComponentCount";
             // 
             // buttonSave
             // 
@@ -166,22 +183,6 @@ namespace CarFactoryView
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // ComponentId
-            // 
-            this.ComponentId.HeaderText = "ComponentId";
-            this.ComponentId.Name = "ComponentId";
-            this.ComponentId.Visible = false;
-            // 
-            // NameComponent
-            // 
-            this.NameComponent.HeaderText = "Компонент";
-            this.NameComponent.Name = "NameComponent";
-            // 
-            // ComponentCount
-            // 
-            this.ComponentCount.HeaderText = "Количество";
-            this.ComponentCount.Name = "ComponentCount";
             // 
             // FormCar
             // 

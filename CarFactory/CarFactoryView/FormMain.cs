@@ -37,6 +37,7 @@ namespace CarFactoryView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
+                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -109,6 +110,18 @@ namespace CarFactoryView
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void компонентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormComponents>();
+            form.ShowDialog();
+        }
+
+        private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormCar>();
+            form.ShowDialog();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace CarFactoryView
             {
                 try
                 {
-                    int id = Convert.ToInt32(comboBoxCars.SelectedValue);
+                    int id = (comboBoxCars.SelectedValue as CarViewModel).Id;
                     CarViewModel car = logicCar.Read(new CarBindingModel { Id = id })?[0];
                     int count = Convert.ToInt32(textBoxCount.Text);
                     textBoxSum.Text = (count * car?.Price ?? 0).ToString();
@@ -60,7 +60,7 @@ namespace CarFactoryView
             {
                 logicOrder.CreateOrder(new CreateOrderBindingModel
                 {
-                    CarId = Convert.ToInt32(comboBoxCars.SelectedValue),
+                    CarId = (comboBoxCars.SelectedValue as CarViewModel).Id,
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });
