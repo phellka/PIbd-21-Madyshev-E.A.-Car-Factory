@@ -118,7 +118,7 @@ namespace CarFactoryView
             form.ShowDialog();
         }
 
-        private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void машиныToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormCars>();
             form.ShowDialog();

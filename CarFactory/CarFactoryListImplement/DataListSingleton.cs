@@ -19,7 +19,7 @@ namespace CarFactoryListImplement.Implemets
             Components = new List<Component>();
             Orders = new List<Order>();
             Cars = new List<Car>();
-            Warehouses = new List<Warehouse>(0);
+            Warehouses = new List<Warehouse>();
         }
         public static DataListSingleton GetInstance()
         {
