@@ -72,7 +72,6 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 throw new Exception("Статус заказа отличен от \"Выполняется\"");
             }
             tempOrder.Status = OrderStatus.Готов;
-            tempOrder.Status = OrderStatus.Готов;
             orderStorage.Update(new OrderBindingModel
             {
                 Id = tempOrder.Id,
