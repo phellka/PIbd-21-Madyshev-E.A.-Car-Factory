@@ -48,12 +48,14 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 throw new Exception("Статус заказа отличен от \"Принят\"");
             }
             tempOrder.Status = OrderStatus.Выполняется;
+            tempOrder.DateImplement = DateTime.Now;
             orderStorage.Update(new OrderBindingModel { 
                 Id = tempOrder.Id,
                 CarId = tempOrder.CarId,
                 Count = tempOrder.Count,
                 Sum = tempOrder.Sum,
                 DateCreate = tempOrder.DateCreate,
+                DateImplement = tempOrder.DateImplement,
                 Status = tempOrder.Status
             });
         }
@@ -70,7 +72,6 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 throw new Exception("Статус заказа отличен от \"Выполняется\"");
             }
             tempOrder.Status = OrderStatus.Готов;
-            tempOrder.DateImplement = DateTime.Now;
             orderStorage.Update(new OrderBindingModel
             {
                 Id = tempOrder.Id,

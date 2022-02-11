@@ -44,9 +44,9 @@ namespace CarFactoryView
             this.labelCar.AutoSize = true;
             this.labelCar.Location = new System.Drawing.Point(12, 29);
             this.labelCar.Name = "labelCar";
-            this.labelCar.Size = new System.Drawing.Size(56, 15);
+            this.labelCar.Size = new System.Drawing.Size(58, 15);
             this.labelCar.TabIndex = 0;
-            this.labelCar.Text = "Изделие:";
+            this.labelCar.Text = "Машина:";
             // 
             // labelCount
             // 
