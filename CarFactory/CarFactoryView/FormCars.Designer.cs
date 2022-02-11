@@ -86,7 +86,6 @@ namespace CarFactoryView
             this.dataGridView.RowTemplate.Height = 25;
             this.dataGridView.Size = new System.Drawing.Size(516, 426);
             this.dataGridView.TabIndex = 5;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
             // FormCars
             // 
