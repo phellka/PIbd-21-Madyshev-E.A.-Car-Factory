@@ -49,6 +49,7 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             }
             tempOrder.Status = OrderStatus.Выполняется;
             tempOrder.DateImplement = DateTime.Now;
+            //test???
             orderStorage.Update(new OrderBindingModel { 
                 Id = tempOrder.Id,
                 CarId = tempOrder.CarId,
