@@ -67,21 +67,25 @@ namespace CarFactoryFileImplement
                 var xDocument = XDocument.Load(OrderFileName);
                 var xElements = xDocument.Root.Elements("Order").ToList();
                 OrderStatus status;
+                DateTime? dateImplement;
                 foreach (var elem in xElements)
                 {
-                    if (Enum.TryParse<OrderStatus>(elem.Element("Status").Value, out status))
+                    Enum.TryParse<OrderStatus>(elem.Element("Status").Value, out status);
+                    dateImplement = null;
+                    if (elem.Element("DateImplement").Value != "")
                     {
-                        list.Add(new Order
-                        {
-                            Id = Convert.ToInt32(elem.Attribute("Id").Value),
-                            CarId = Convert.ToInt32(elem.Element("CarId").Value),
-                            Count = Convert.ToInt32(elem.Element("Count").Value),
-                            Sum = Convert.ToDecimal(elem.Element("Sum").Value),
-                            Status = status,
-                            DateCreate = DateTime.Parse(elem.Element("DateCreate").Value),
-                            DateImplement = DateTime.Parse(elem.Element("DateImplement").Value)
-                        });
+                        dateImplement = DateTime.Parse(elem.Element("DateImplement").Value);
                     }
+                    list.Add(new Order
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        CarId = Convert.ToInt32(elem.Element("CarId").Value),
+                        Count = Convert.ToInt32(elem.Element("Count").Value),
+                        Sum = Convert.ToDecimal(elem.Element("Sum").Value),
+                        Status = status,
+                        DateCreate = DateTime.Parse(elem.Element("DateCreate").Value),
+                        DateImplement = dateImplement
+                    });
                 }
             }
             return list;
@@ -141,7 +145,7 @@ namespace CarFactoryFileImplement
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
                         new XElement("Status", order.Status),
-                        new XElement("DareCreate", order.DateCreate),
+                        new XElement("DateCreate", order.DateCreate),
                         new XElement("DateImplement", order.DateImplement)));
                 }
                 var xDocument = new XDocument(xElement);
