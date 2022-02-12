@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CarFactoryBusinessLogic\CarFactoryBusinessLogic.csproj" />
     <ProjectReference Include="..\CarFactoryContracts\CarFactoryContracts.csproj" />
+    <ProjectReference Include="..\CarFactoryFileImplement\CarFactoryFileImplement.csproj" />
     <ProjectReference Include="..\CarFactoryListImplement\CarFactoryListImplement.csproj" />
   </ItemGroup>
 
