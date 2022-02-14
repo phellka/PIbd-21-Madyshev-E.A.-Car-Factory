@@ -201,7 +201,7 @@ namespace CarFactoryView
             this.Controls.Add(this.labelPrice);
             this.Controls.Add(this.labelName);
             this.Name = "FormCar";
-            this.Text = "FormCar";
+            this.Text = "Машина";
             this.Load += new System.EventHandler(this.FormCar_Load);
             this.groupBoxComponents.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
