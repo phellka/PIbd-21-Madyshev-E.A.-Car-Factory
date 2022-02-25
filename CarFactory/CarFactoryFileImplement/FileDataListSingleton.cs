@@ -35,10 +35,10 @@ namespace CarFactoryFileImplement
             }
             return instance;
         }
-        ~FileDataListSingleton()
+        public void Save()
         {
-            SaveComponents();
             SaveOrders();
+            SaveComponents();
             SaveCars();
         }
         private List<Component> LoadComponents()
