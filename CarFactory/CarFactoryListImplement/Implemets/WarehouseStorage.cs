@@ -151,5 +151,15 @@ namespace CarFactoryListImplement.Implemets
             }
             return warehouse;
         }
+
+        public bool CheckBalance(Dictionary<int, int> components)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool WriteOffBalance(Dictionary<int, int> components)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

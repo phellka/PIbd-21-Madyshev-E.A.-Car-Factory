@@ -16,5 +16,7 @@ namespace CarFactoryContracts.StoragesContracts
         void Insert(WarehouseBindingModel model);
         void Update(WarehouseBindingModel model);
         void Delete(WarehouseBindingModel model);
+        bool CheckBalance(Dictionary<int, int> components);
+        bool WriteOffBalance(Dictionary<int, int> components);
     }
 }
