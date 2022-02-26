@@ -6,8 +6,7 @@ using System.Windows.Forms;
 using CarFactoryBusinessLogic.BusinessLogics;
 using CarFactoryContracts.BusinessLogicsContracts;
 using CarFactoryContracts.StoragesContracts;
-using CarFactoryFileImplement.Implements;
-using CarFactoryFileImplement;
+using CarFactoryDatabaseImplement.Implements;
 using Unity;
 using Unity.Lifetime;
 
@@ -37,7 +36,6 @@ namespace CarFactoryView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
-            FileDataListSingleton.GetInstance().Save();
         }
         private static IUnityContainer BuildUnityContainer()
         {
