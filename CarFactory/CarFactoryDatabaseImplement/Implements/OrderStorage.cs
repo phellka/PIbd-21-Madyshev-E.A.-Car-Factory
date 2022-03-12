@@ -34,7 +34,8 @@ namespace CarFactoryDatabaseImplement.Implements
                 return null;
             }
             using var context = new CarFactoryDatabase();
-            return context.Orders.Include(rec => rec.Car).Where(rec => rec.CarId == model.CarId).Select(rec => new OrderViewModel
+            return context.Orders.Include(rec => rec.Car).Where(rec => rec.CarId == model.CarId || 
+                (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)).Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
                 CarId = rec.CarId,

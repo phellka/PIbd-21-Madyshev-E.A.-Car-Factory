@@ -40,8 +40,8 @@ namespace CarFactoryView
             this.компонентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.списокКомпонентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.компонентыПоМашинамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.списокМашинToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.МашиныПоКомпанентамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -144,30 +144,33 @@ namespace CarFactoryView
             // отчетыToolStripMenuItem
             // 
             this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.списокКомпонентовToolStripMenuItem,
-            this.компонентыПоМашинамToolStripMenuItem,
+            this.списокМашинToolStripMenuItem,
+            this.МашиныПоКомпанентамToolStripMenuItem,
             this.списокЗаказовToolStripMenuItem});
             this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
             this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.отчетыToolStripMenuItem.Text = "Отчеты";
             // 
-            // списокКомпонентовToolStripMenuItem
+            // списокМашинToolStripMenuItem
             // 
-            this.списокКомпонентовToolStripMenuItem.Name = "списокКомпонентовToolStripMenuItem";
-            this.списокКомпонентовToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.списокКомпонентовToolStripMenuItem.Text = "Список компонентов";
+            this.списокМашинToolStripMenuItem.Name = "списокМашинToolStripMenuItem";
+            this.списокМашинToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.списокМашинToolStripMenuItem.Text = "Список машин";
+            this.списокМашинToolStripMenuItem.Click += new System.EventHandler(this.списокМашинToolStripMenuItem_Click);
             // 
-            // компонентыПоМашинамToolStripMenuItem
+            // МашиныПоКомпанентамToolStripMenuItem
             // 
-            this.компонентыПоМашинамToolStripMenuItem.Name = "компонентыПоМашинамToolStripMenuItem";
-            this.компонентыПоМашинамToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.компонентыПоМашинамToolStripMenuItem.Text = "Компоненты по машинам";
+            this.МашиныПоКомпанентамToolStripMenuItem.Name = "МашиныПоКомпанентамToolStripMenuItem";
+            this.МашиныПоКомпанентамToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.МашиныПоКомпанентамToolStripMenuItem.Text = "Машины по компанентам";
+            this.МашиныПоКомпанентамToolStripMenuItem.Click += new System.EventHandler(this.МашиныПоКомпанентамToolStripMenuItem_Click);
             // 
             // списокЗаказовToolStripMenuItem
             // 
             this.списокЗаказовToolStripMenuItem.Name = "списокЗаказовToolStripMenuItem";
             this.списокЗаказовToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.списокЗаказовToolStripMenuItem.Text = "Список заказов";
+            this.списокЗаказовToolStripMenuItem.Click += new System.EventHandler(this.списокЗаказовToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -206,8 +209,8 @@ namespace CarFactoryView
         private System.Windows.Forms.ToolStripMenuItem компонентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem изделияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem списокКомпонентовToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem компонентыПоМашинамToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem списокМашинToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem МашиныПоКомпанентамToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
     }
 }

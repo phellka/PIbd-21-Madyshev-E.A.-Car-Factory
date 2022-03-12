@@ -31,8 +31,8 @@ namespace CarFactoryView
         {
             this.buttonSaveExcel = new System.Windows.Forms.Button();
             this.dataGridViewComponents = new System.Windows.Forms.DataGridView();
-            this.Component = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Car = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Component = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewComponents)).BeginInit();
             this.SuspendLayout();
@@ -52,8 +52,8 @@ namespace CarFactoryView
             this.dataGridViewComponents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewComponents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Component,
             this.Car,
+            this.Component,
             this.Count});
             this.dataGridViewComponents.Location = new System.Drawing.Point(12, 41);
             this.dataGridViewComponents.Name = "dataGridViewComponents";
@@ -62,17 +62,17 @@ namespace CarFactoryView
             this.dataGridViewComponents.Size = new System.Drawing.Size(569, 397);
             this.dataGridViewComponents.TabIndex = 1;
             // 
-            // Component
-            // 
-            this.Component.HeaderText = "Компонент";
-            this.Component.Name = "Component";
-            this.Component.ReadOnly = true;
-            // 
             // Car
             // 
             this.Car.HeaderText = "Машина";
             this.Car.Name = "Car";
             this.Car.ReadOnly = true;
+            // 
+            // Component
+            // 
+            this.Component.HeaderText = "Компонент";
+            this.Component.Name = "Component";
+            this.Component.ReadOnly = true;
             // 
             // Count
             // 
@@ -99,8 +99,8 @@ namespace CarFactoryView
 
         private System.Windows.Forms.Button buttonSaveExcel;
         private System.Windows.Forms.DataGridView dataGridViewComponents;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Component;
         private System.Windows.Forms.DataGridViewTextBoxColumn Car;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Component;
         private System.Windows.Forms.DataGridViewTextBoxColumn Count;
     }
 }

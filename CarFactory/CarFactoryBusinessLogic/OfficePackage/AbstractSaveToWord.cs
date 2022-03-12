@@ -22,11 +22,12 @@ namespace CarFactoryBusinessLogic.OfficePackage
                     JustificationType = WordJustificationType.Center
                 }
             });
-            foreach (var component in info.Components)
+            foreach (var component in info.Cars)
             {
                 CreateParagraph(new WordParagraph
                 {
-                    Texts = new List<(string, WordTextProperties)> { (component.ComponentName, new WordTextProperties { Size = "24"}) },
+                    Texts = new List<(string, WordTextProperties)> { (component.CarName, new WordTextProperties {Bold = true, Size = "24"}),
+                        (" Цена " + component.Price.ToString(), new WordTextProperties {Bold = false, Size = "24"})},
                     TextProperties = new WordTextProperties
                     {
                         Size = "24",

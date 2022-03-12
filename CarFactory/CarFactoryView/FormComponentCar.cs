@@ -32,8 +32,8 @@ namespace CarFactoryView
                     dataGridViewComponents.Rows.Clear();
                     foreach (var elem in dict)
                     {
-                        dataGridViewComponents.Rows.Add(new object[] { elem.ComponentName, "", ""});
-                        foreach (var listElem in elem.Cars)
+                        dataGridViewComponents.Rows.Add(new object[] { elem.CarName, "", ""});
+                        foreach (var listElem in elem.Components)
                         {
                             dataGridViewComponents.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });
                         }

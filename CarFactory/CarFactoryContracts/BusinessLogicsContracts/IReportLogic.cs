@@ -12,7 +12,7 @@ namespace CarFactoryContracts.BusinessLogicsContracts
     {
         List<ReportCarComponentViewModel> GetCarComponent();
         List<ReportOrdersViewModel> GetOrders(ReportBindingModel model);
-        void SaveComponentsToWordFile(ReportBindingModel model);
+        void SaveCarsToWordFile(ReportBindingModel model);
         void SaveCarComponentToExcelFile(ReportBindingModel model);
         void SaveOrdersToPdfFile(ReportBindingModel model);
     }

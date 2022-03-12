@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.15.0" />
-    <PackageReference Include="PDFsharp-MigraDoc-GDI" Version="1.50.5147" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1484.0" />
+    <PackageReference Include="Microsoft.ReportViewer.Runtime.Common" Version="12.0.2402.15" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="PDFsharp-MigraDoc" Version="1.50.5147" />
   </ItemGroup>
 
   <ItemGroup>

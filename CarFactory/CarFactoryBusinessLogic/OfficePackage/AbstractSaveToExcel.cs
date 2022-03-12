@@ -32,11 +32,11 @@ namespace CarFactoryBusinessLogic.OfficePackage
                 {
                     ColumnName = "A",
                     RowIndex = rowIndex,
-                    Text = pc.ComponentName,
+                    Text = pc.CarName,
                     StyleInfo = ExcelStyleInfoType.Text
                 });
                 rowIndex++;
-                foreach (var product in pc.Cars)
+                foreach (var product in pc.Components)
                 {
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
@@ -54,6 +54,13 @@ namespace CarFactoryBusinessLogic.OfficePackage
                     });
                     rowIndex++;
                 }
+                InsertCellInWorksheet(new ExcelCellParameters
+                {
+                    ColumnName = "A",
+                    RowIndex = rowIndex,
+                    Text = "Итого",
+                    StyleInfo = ExcelStyleInfoType.Text
+                });
                 InsertCellInWorksheet(new ExcelCellParameters
                 {
                     ColumnName = "C",
