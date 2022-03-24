@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CarFactoryContracts.BindingModels;
 using CarFactoryContracts.BusinessLogicsContracts;
+using CarFactoryBusinessLogic.OfficePackage;
 using Unity;
 
 namespace CarFactoryView
@@ -16,10 +17,12 @@ namespace CarFactoryView
     public partial class FormMain : Form
     {
         private readonly IOrderLogic orderLogic;
-        public FormMain(IOrderLogic orderLogic)
+        private readonly IReportLogic reportLogic;
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic)
         {
             InitializeComponent();
             this.orderLogic = orderLogic;
+            this.reportLogic = reportLogic;
         }
 
 
@@ -121,6 +124,32 @@ namespace CarFactoryView
         private void машиныToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormCars>();
+            form.ShowDialog();
+        }
+
+        private void списокМашинToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                reportLogic.SaveCarsToWordFile(new ReportBindingModel
+                {
+                    FileName = dialog.FileName
+                });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+
+        private void машиныПоКомпанентамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormComponentCar>();
+            form.ShowDialog();
+        }
+
+        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
     }
