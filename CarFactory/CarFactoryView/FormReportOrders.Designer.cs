@@ -35,12 +35,14 @@ namespace CarFactoryView
             this.labelTo = new System.Windows.Forms.Label();
             this.buttonMake = new System.Windows.Forms.Button();
             this.buttonToPdf = new System.Windows.Forms.Button();
+            this.panel = new System.Windows.Forms.Panel();
+            this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelFrom
             // 
             this.labelFrom.AutoSize = true;
-            this.labelFrom.Location = new System.Drawing.Point(12, 9);
+            this.labelFrom.Location = new System.Drawing.Point(6, 15);
             this.labelFrom.Name = "labelFrom";
             this.labelFrom.Size = new System.Drawing.Size(15, 15);
             this.labelFrom.TabIndex = 0;
@@ -48,14 +50,14 @@ namespace CarFactoryView
             // 
             // dateTimePickerFrom
             // 
-            this.dateTimePickerFrom.Location = new System.Drawing.Point(56, 12);
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(50, 18);
             this.dateTimePickerFrom.Name = "dateTimePickerFrom";
             this.dateTimePickerFrom.Size = new System.Drawing.Size(144, 23);
             this.dateTimePickerFrom.TabIndex = 1;
             // 
             // dateTimePickerTo
             // 
-            this.dateTimePickerTo.Location = new System.Drawing.Point(269, 12);
+            this.dateTimePickerTo.Location = new System.Drawing.Point(263, 18);
             this.dateTimePickerTo.Name = "dateTimePickerTo";
             this.dateTimePickerTo.Size = new System.Drawing.Size(144, 23);
             this.dateTimePickerTo.TabIndex = 3;
@@ -63,7 +65,7 @@ namespace CarFactoryView
             // labelTo
             // 
             this.labelTo.AutoSize = true;
-            this.labelTo.Location = new System.Drawing.Point(225, 9);
+            this.labelTo.Location = new System.Drawing.Point(219, 15);
             this.labelTo.Name = "labelTo";
             this.labelTo.Size = new System.Drawing.Size(23, 15);
             this.labelTo.TabIndex = 2;
@@ -71,7 +73,7 @@ namespace CarFactoryView
             // 
             // buttonMake
             // 
-            this.buttonMake.Location = new System.Drawing.Point(467, 12);
+            this.buttonMake.Location = new System.Drawing.Point(461, 18);
             this.buttonMake.Name = "buttonMake";
             this.buttonMake.Size = new System.Drawing.Size(100, 23);
             this.buttonMake.TabIndex = 4;
@@ -81,7 +83,7 @@ namespace CarFactoryView
             // 
             // buttonToPdf
             // 
-            this.buttonToPdf.Location = new System.Drawing.Point(713, 12);
+            this.buttonToPdf.Location = new System.Drawing.Point(707, 18);
             this.buttonToPdf.Name = "buttonToPdf";
             this.buttonToPdf.Size = new System.Drawing.Size(75, 23);
             this.buttonToPdf.TabIndex = 5;
@@ -89,21 +91,31 @@ namespace CarFactoryView
             this.buttonToPdf.UseVisualStyleBackColor = true;
             this.buttonToPdf.Click += new System.EventHandler(this.buttonToPdf_Click);
             // 
+            // panel
+            // 
+            this.panel.Controls.Add(this.labelFrom);
+            this.panel.Controls.Add(this.buttonToPdf);
+            this.panel.Controls.Add(this.dateTimePickerFrom);
+            this.panel.Controls.Add(this.buttonMake);
+            this.panel.Controls.Add(this.labelTo);
+            this.panel.Controls.Add(this.dateTimePickerTo);
+            this.panel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel.Location = new System.Drawing.Point(0, 0);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(800, 57);
+            this.panel.TabIndex = 6;
+            // 
             // FormReportOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.buttonToPdf);
-            this.Controls.Add(this.buttonMake);
-            this.Controls.Add(this.dateTimePickerTo);
-            this.Controls.Add(this.labelTo);
-            this.Controls.Add(this.dateTimePickerFrom);
-            this.Controls.Add(this.labelFrom);
+            this.Controls.Add(this.panel);
             this.Name = "FormReportOrders";
             this.Text = "FormOrders";
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -115,5 +127,6 @@ namespace CarFactoryView
         private System.Windows.Forms.Label labelTo;
         private System.Windows.Forms.Button buttonMake;
         private System.Windows.Forms.Button buttonToPdf;
+        private System.Windows.Forms.Panel panel;
     }
 }
