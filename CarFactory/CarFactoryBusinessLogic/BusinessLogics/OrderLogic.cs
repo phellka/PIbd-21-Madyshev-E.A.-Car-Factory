@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CarFactoryContracts.BindingModels;
 using CarFactoryContracts.BusinessLogicsContracts;
@@ -12,9 +13,13 @@ namespace CarFactoryBusinessLogic.BusinessLogics
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage orderStorage;
-        public OrderLogic(IOrderStorage orderStorage)
+        private readonly IWarehouseStorage warehouseStorage;
+        private readonly ICarStorage carStorage;
+        public OrderLogic(IOrderStorage orderStorage, IWarehouseStorage warehouseStorage, ICarStorage carStorage)
         {
             this.orderStorage = orderStorage;
+            this.warehouseStorage = warehouseStorage;
+            this.carStorage = carStorage;
         }
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
@@ -46,6 +51,19 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             if (tempOrder.Status != OrderStatus.Принят)
             {
                 throw new Exception("Статус заказа отличен от \"Принят\"");
+            }
+            CarViewModel tempCar = carStorage.GetElement(new CarBindingModel
+            { Id = tempOrder.CarId });
+            try
+            {
+                if (!warehouseStorage.WriteOffBalance(tempCar.CarComponents.ToDictionary(car => car.Key, car => car.Value.Item2 * tempOrder.Count)))
+                {
+                    throw new Exception("На складах недостаточно компонентов");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             tempOrder.Status = OrderStatus.Выполняется;
             tempOrder.DateImplement = DateTime.Now;
