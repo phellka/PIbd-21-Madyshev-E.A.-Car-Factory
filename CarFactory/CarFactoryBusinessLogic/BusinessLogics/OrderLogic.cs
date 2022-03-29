@@ -32,7 +32,9 @@ namespace CarFactoryBusinessLogic.BusinessLogics
         {
             OrderBindingModel tempOrder = new OrderBindingModel { 
                 CarId = model.CarId, Count = model.Count, Sum = model.Sum,
-                Status = OrderStatus.Принят, DateCreate = DateTime.Now};
+                Status = OrderStatus.Принят, DateCreate = DateTime.Now,
+                ClientId = model.ClientId
+            };
             orderStorage.Insert(tempOrder);
         }
         public void TakeOrder(ChangeStatusBindingModel model)
@@ -49,14 +51,16 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             }
             tempOrder.Status = OrderStatus.Выполняется;
             tempOrder.DateImplement = DateTime.Now;
-            orderStorage.Update(new OrderBindingModel { 
+            orderStorage.Update(new OrderBindingModel
+            {
                 Id = tempOrder.Id,
                 CarId = tempOrder.CarId,
                 Count = tempOrder.Count,
                 Sum = tempOrder.Sum,
                 DateCreate = tempOrder.DateCreate,
                 DateImplement = tempOrder.DateImplement,
-                Status = tempOrder.Status
+                Status = tempOrder.Status,
+                ClientId = tempOrder.ClientId
             });
         }
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -80,7 +84,8 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 Sum = tempOrder.Sum,
                 DateCreate = tempOrder.DateCreate,
                 DateImplement = tempOrder.DateImplement,
-                Status = tempOrder.Status
+                Status = tempOrder.Status,
+                ClientId = tempOrder.ClientId
             });
         }
         public void DeliveryOrder(ChangeStatusBindingModel model)
@@ -104,7 +109,8 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 Sum = tempOrder.Sum,
                 DateCreate = tempOrder.DateCreate,
                 DateImplement = tempOrder.DateImplement,
-                Status = tempOrder.Status
+                Status = tempOrder.Status,
+                ClientId = tempOrder.ClientId
             });
         }    
     }

@@ -10,6 +10,9 @@ namespace CarFactoryContracts.ViewModels
     {
         public int Id { get; set; }
         public int CarId { get; set; }
+        public int ClientId { get; set; }
+        [DisplayName("ФИО клиента")]
+        public string ClientFCs { get; set; }
         [DisplayName("Машина")]
         public string CarName { get; set; }
         [DisplayName("Количество")]

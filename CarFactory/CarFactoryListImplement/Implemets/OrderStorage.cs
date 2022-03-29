@@ -35,7 +35,9 @@ namespace CarFactoryListImplement.Implemets
             var result = new List<OrderViewModel>();
             foreach(var order in source.Orders)
             {
-                if (order.CarId == model.CarId || (order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo))
+                if (order.CarId == model.CarId || (model.DateFrom.HasValue && model.DateTo.HasValue && 
+                    order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                    || model.ClientId.HasValue && order.ClientId == model.ClientId.Value)
                 {
                     result.Add(CreateModel(order));
                 }
@@ -106,6 +108,7 @@ namespace CarFactoryListImplement.Implemets
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = model.ClientId.Value;
             return order;
         }
         public OrderViewModel CreateModel(Order order)
@@ -116,6 +119,16 @@ namespace CarFactoryListImplement.Implemets
                 if(car.Id == order.CarId)
                 {
                     carName = car.CarName;
+                    break;
+                }
+            }
+            string clientFCs = string.Empty;
+            foreach(var client in source.Clients)
+            {
+                if(client.Id == order.ClientId)
+                {
+                    clientFCs = client.FCs;
+                    break;
                 }
             }
             return new OrderViewModel { 
@@ -126,7 +139,9 @@ namespace CarFactoryListImplement.Implemets
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ClientId = order.ClientId,
+                ClientFCs = clientFCs
             };
         }
     }

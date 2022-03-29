@@ -24,7 +24,9 @@ namespace CarFactoryDatabaseImplement.Implements
                 Sum = rec.Sum,
                 Status = rec.Status,
                 DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
+                DateImplement = rec.DateImplement,
+                ClientId = rec.ClientId,
+                ClientFCs = rec.Client.ClientFCs
             }).ToList();
         }
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
@@ -34,8 +36,9 @@ namespace CarFactoryDatabaseImplement.Implements
                 return null;
             }
             using var context = new CarFactoryDatabase();
-            return context.Orders.Include(rec => rec.Car).Where(rec => rec.CarId == model.CarId ||
-                (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)).Select(rec => new OrderViewModel
+            return context.Orders.Include(rec => rec.Car).Include(rec => rec.Client).Where(rec => rec.CarId == model.CarId ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue &&  rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
+                model.ClientId.HasValue && rec.ClientId == model.ClientId).Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
                 CarId = rec.CarId,
@@ -44,7 +47,9 @@ namespace CarFactoryDatabaseImplement.Implements
                 Sum = rec.Sum,
                 Status = rec.Status,
                 DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement
+                DateImplement = rec.DateImplement,
+                ClientId = rec.ClientId,
+                ClientFCs = rec.Client.ClientFCs
             }).ToList();
         }
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -97,6 +102,7 @@ namespace CarFactoryDatabaseImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = model.ClientId.Value;
             return order;
         }
         public OrderViewModel CreateModel(Order order, CarFactoryDatabase context)
@@ -110,7 +116,9 @@ namespace CarFactoryDatabaseImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ClientId = order.ClientId,
+                ClientFCs = order.Client.ClientFCs
             };
         }
     }

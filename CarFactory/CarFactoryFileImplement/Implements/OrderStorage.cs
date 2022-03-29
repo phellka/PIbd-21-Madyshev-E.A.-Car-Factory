@@ -28,7 +28,8 @@ namespace CarFactoryFileImplement.Implements
                 return null;
             }
             return source.Orders.Where(rec => rec.CarId == model.CarId ||
-                (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)).Select(CreateModel).ToList();
+                (model.DateFrom.HasValue && model.DateTo.HasValue &&  rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                || model.ClientId.HasValue && rec.ClientId == model.ClientId.Value).Select(CreateModel).ToList();
         }
         public OrderViewModel GetElement(OrderBindingModel model)
         {
@@ -75,6 +76,7 @@ namespace CarFactoryFileImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = model.ClientId.Value;
             return order;
         }
         public OrderViewModel CreateModel(Order order)
@@ -83,6 +85,8 @@ namespace CarFactoryFileImplement.Implements
             {
                 Id = order.Id,
                 CarId = order.CarId,
+                ClientId = order.ClientId,
+                ClientFCs = source.Clients.FirstOrDefault(rec => rec.Id == order.ClientId)?.FCs,
                 CarName = source.Cars.FirstOrDefault(rec => rec.Id == order.CarId)?.CarName,
                 Count = order.Count,
                 Sum = order.Sum,
