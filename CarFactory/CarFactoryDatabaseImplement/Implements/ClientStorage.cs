@@ -24,7 +24,7 @@ namespace CarFactoryDatabaseImplement.Implements
                 return null;
             }
             using var context = new CarFactoryDatabase();
-            return context.Clients.Where(rec => rec.ClientFCs.Contains(model.FCs)).Select(CreateModel).ToList();
+            return context.Clients.Where(rec => rec.Login == model.Login && rec.Password == model.Password).Select(CreateModel).ToList();
         }
         public ClientViewModel GetElement(ClientBindingModel model)
         {

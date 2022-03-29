@@ -10,6 +10,7 @@ namespace CarFactoryContracts.ViewModels
     {
         public int Count { get; set; }
         public DateTime DateCreate { get; set; }
+        public string ClientFCs { get; set; }
         public string CarName { get; set; }
         public string Status { get; set; }
         public decimal Sum { get; set; }

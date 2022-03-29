@@ -67,7 +67,8 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 CarName = x.CarName,
                 Count = x.Count,
                 Sum = x.Sum,
-                Status = x.Status.ToString()
+                Status = x.Status.ToString(),
+                ClientFCs = x.ClientFCs
             })
            .ToList();
         }

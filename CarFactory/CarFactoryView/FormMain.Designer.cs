@@ -39,6 +39,7 @@ namespace CarFactoryView
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.компонентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокМашинToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.машиныПоКомпанентамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,12 +55,12 @@ namespace CarFactoryView
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 25;
-            this.dataGridView.Size = new System.Drawing.Size(649, 269);
+            this.dataGridView.Size = new System.Drawing.Size(813, 269);
             this.dataGridView.TabIndex = 0;
             // 
             // buttonCreateOrder
             // 
-            this.buttonCreateOrder.Location = new System.Drawing.Point(667, 56);
+            this.buttonCreateOrder.Location = new System.Drawing.Point(831, 53);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
             this.buttonCreateOrder.Size = new System.Drawing.Size(149, 23);
             this.buttonCreateOrder.TabIndex = 1;
@@ -69,7 +70,7 @@ namespace CarFactoryView
             // 
             // buttonTakeOrderInWork
             // 
-            this.buttonTakeOrderInWork.Location = new System.Drawing.Point(667, 108);
+            this.buttonTakeOrderInWork.Location = new System.Drawing.Point(831, 105);
             this.buttonTakeOrderInWork.Name = "buttonTakeOrderInWork";
             this.buttonTakeOrderInWork.Size = new System.Drawing.Size(149, 23);
             this.buttonTakeOrderInWork.TabIndex = 2;
@@ -79,7 +80,7 @@ namespace CarFactoryView
             // 
             // buttonOrderReady
             // 
-            this.buttonOrderReady.Location = new System.Drawing.Point(667, 158);
+            this.buttonOrderReady.Location = new System.Drawing.Point(831, 155);
             this.buttonOrderReady.Name = "buttonOrderReady";
             this.buttonOrderReady.Size = new System.Drawing.Size(149, 23);
             this.buttonOrderReady.TabIndex = 3;
@@ -89,7 +90,7 @@ namespace CarFactoryView
             // 
             // buttonIssuedOrder
             // 
-            this.buttonIssuedOrder.Location = new System.Drawing.Point(667, 206);
+            this.buttonIssuedOrder.Location = new System.Drawing.Point(831, 203);
             this.buttonIssuedOrder.Name = "buttonIssuedOrder";
             this.buttonIssuedOrder.Size = new System.Drawing.Size(149, 23);
             this.buttonIssuedOrder.TabIndex = 4;
@@ -99,7 +100,7 @@ namespace CarFactoryView
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(667, 250);
+            this.buttonUpdate.Location = new System.Drawing.Point(831, 247);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(149, 23);
             this.buttonUpdate.TabIndex = 5;
@@ -114,7 +115,7 @@ namespace CarFactoryView
             this.отчетыToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(827, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(992, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -122,7 +123,8 @@ namespace CarFactoryView
             // 
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.компонентыToolStripMenuItem,
-            this.изделияToolStripMenuItem});
+            this.изделияToolStripMenuItem,
+            this.клиентыToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -140,6 +142,13 @@ namespace CarFactoryView
             this.изделияToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.изделияToolStripMenuItem.Text = "Машины";
             this.изделияToolStripMenuItem.Click += new System.EventHandler(this.машиныToolStripMenuItem_Click);
+            // 
+            // клиентыToolStripMenuItem
+            // 
+            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
+            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.клиентыToolStripMenuItem.Text = "Клиенты";
+            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
             // 
             // отчетыToolStripMenuItem
             // 
@@ -176,7 +185,7 @@ namespace CarFactoryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(827, 310);
+            this.ClientSize = new System.Drawing.Size(992, 310);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonIssuedOrder);
             this.Controls.Add(this.buttonOrderReady);
@@ -212,6 +221,7 @@ namespace CarFactoryView
         private System.Windows.Forms.ToolStripMenuItem списокМашинToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem машиныПоКомпанентамToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
     }
 }
 

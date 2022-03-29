@@ -17,11 +17,13 @@ namespace CarFactoryView
     {
         private readonly ICarLogic logicCar;
         private readonly IOrderLogic logicOrder;
-        public FormCreateOrder(ICarLogic logicP, IOrderLogic logicO)
+        private readonly IClientLogic logicClient;
+        public FormCreateOrder(ICarLogic logicP, IOrderLogic logicO, IClientLogic logicC)
         {
             InitializeComponent();
             logicCar = logicP;
             logicOrder = logicO;
+            logicClient = logicC;
         }
         private void CalcSum()
         {
@@ -56,13 +58,20 @@ namespace CarFactoryView
                     MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClients.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 logicOrder.CreateOrder(new CreateOrderBindingModel
                 {
                     CarId = Convert.ToInt32(comboBoxCars.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
-                    Sum = Convert.ToDecimal(textBoxSum.Text)
+                    Sum = Convert.ToDecimal(textBoxSum.Text),
+                    ClientId = Convert.ToInt32(comboBoxClients.SelectedValue)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -93,6 +102,14 @@ namespace CarFactoryView
                     comboBoxCars.ValueMember = "Id";
                     comboBoxCars.DataSource = list;
                     comboBoxCars.SelectedItem = null;
+                }
+                List<ClientViewModel> listClients = logicClient.Read(null);
+                if (listClients != null)
+                {
+                    comboBoxClients.DisplayMember = "FCs";
+                    comboBoxClients.ValueMember = "Id";
+                    comboBoxClients.DataSource = listClients;
+                    comboBoxClients.SelectedItem = null;
                 }
             }
             catch (Exception ex)
