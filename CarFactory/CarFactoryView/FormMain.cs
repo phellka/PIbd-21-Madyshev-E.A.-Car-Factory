@@ -144,13 +144,51 @@ namespace CarFactoryView
 
         private void машиныПоКомпанентамToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Program.Container.Resolve<FormComponentCar>();
+            var form = Program.Container.Resolve<FormReportComponentCar>();
             form.ShowDialog();
         }
 
         private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormWarehouses>();
+            form.ShowDialog();
+        }
+
+        private void пополнениеСкладаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormWarehouseAddComponent>();
+            form.ShowDialog();
+        }
+
+        private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                reportLogic.SaveWarehousesToWordFile(new ReportBindingModel
+                {
+                    FileName = dialog.FileName
+                });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+
+        private void складыПоКомпанентамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportWarehouseComponent>();
+            form.ShowDialog();
+        }
+
+        private void списокЗаказовПоДатамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrdersByDate>();
             form.ShowDialog();
         }
 

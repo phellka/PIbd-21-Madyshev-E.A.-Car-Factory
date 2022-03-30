@@ -18,17 +18,20 @@ namespace CarFactoryBusinessLogic.BusinessLogics
         private readonly IComponentStorage componentStorage;
         private readonly ICarStorage carStorage;
         private readonly IOrderStorage orderStorage;
+        private readonly IWarehouseStorage warehouseStorage;
         private readonly AbstractSaveToExcel saveToExcel;
         private readonly AbstractSaveToWord saveToWord;
         private readonly AbstractSaveToPdf saveToPdf;
         public ReportLogic(ICarStorage carStorage, IComponentStorage
             componentStorage, IOrderStorage orderStorage,
+            IWarehouseStorage warehouseStorage,
             AbstractSaveToExcel saveToExcel, AbstractSaveToWord saveToWord,
             AbstractSaveToPdf saveToPdf)
         {
             this.carStorage = carStorage;
             this.componentStorage = componentStorage;
             this.orderStorage = orderStorage;
+            this.warehouseStorage = warehouseStorage;
             this.saveToExcel = saveToExcel;
             this.saveToWord = saveToWord;
             this.saveToPdf = saveToPdf;
@@ -46,6 +49,27 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                     TotalCount = 0
                 };
                 foreach (var component in car.CarComponents)
+                {
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
+                }
+                list.Add(record);
+            }
+            return list;
+        }
+        public List<ReportWarehouseComponentViewModel> GetWarehouseComponent()
+        {
+            var warehouses = warehouseStorage.GetFullList();
+            var list = new List<ReportWarehouseComponentViewModel>();
+            foreach (var warehouse in warehouses)
+            {
+                var record = new ReportWarehouseComponentViewModel
+                {
+                    WarehouseName = warehouse.WarehouseName,
+                    Components = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+                foreach (var component in warehouse.WarehouseComponents)
                 {
                     record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
                     record.TotalCount += component.Value.Item2;
@@ -72,6 +96,18 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             })
            .ToList();
         }
+        public List<ReportOrdersByDateViewModel> GetOrdersByDate()
+        {
+            return orderStorage.GetFullList()
+            .GroupBy(rec => rec.DateCreate.ToShortDateString())
+            .Select(x => new ReportOrdersByDateViewModel
+            {
+                DateCreate = Convert.ToDateTime(x.Key),
+                Count = x.Count(),
+                Sum = x.Sum(rec => rec.Sum)
+            })
+           .ToList();
+        }
         public void SaveCarsToWordFile(ReportBindingModel model)
         {
             saveToWord.CreateDoc(new WordInfo
@@ -81,6 +117,15 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 Cars = carStorage.GetFullList()
             });
         }
+        public void SaveWarehousesToWordFile(ReportBindingModel model)
+        {
+            saveToWord.CreateDocWarehouse(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                Warehouses = warehouseStorage.GetFullList()
+            });
+        }
         public void SaveCarComponentToExcelFile(ReportBindingModel model)
         {
             saveToExcel.CreateReport(new ExcelInfo
@@ -88,6 +133,15 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 FileName = model.FileName,
                 Title = "Список компонент",
                 CarComponents = GetCarComponent()
+            });
+        }
+        public void SaveWarehouseComponentToExcelFile(ReportBindingModel model)
+        {
+            saveToExcel.CreateReportWarehouse(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Список компонент",
+                WarehouseComponents = GetWarehouseComponent()
             });
         }
         public void SaveOrdersToPdfFile(ReportBindingModel model)
@@ -101,6 +155,14 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 Orders = GetOrders(model)
             });
         }
-
+        public void SaveOrdersByDateToPdfFile(ReportBindingModel model)
+        {
+            saveToPdf.CreateDocOrdersByDate(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Список заказов по датам",
+                OrdersByDate = GetOrdersByDate()
+            });
+        }
     }
 }

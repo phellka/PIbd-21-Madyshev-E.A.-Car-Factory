@@ -15,7 +15,7 @@ namespace CarFactoryDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-HJ4MGBC;Initial Catalog=CarFactoryDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-HJ4MGBC;Initial Catalog=CarFactoryDatabaseADDS;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -23,6 +23,8 @@ namespace CarFactoryDatabaseImplement
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<CarComponent> CarComponents { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<WarehouseComponent> WarehouseComponents { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
     }
 }
