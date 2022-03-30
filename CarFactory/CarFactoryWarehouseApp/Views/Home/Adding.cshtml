@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Adding";
+}
+<div class="text-center">
+    <h2 class="display-4">Пополнение склада</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Склад:</div>
+        <div class="col-8">
+            <select id="warehouse" name="warehouse" class="form-control" asp-items="@(new SelectList(@ViewBag.Warehouses,"Id", "WarehouseName"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Компонент:</div>
+        <div class="col-8">
+            <select id="component" name="component" class="form-control" asp-items="@(new SelectList(@ViewBag.Components,"Id", "ComponentName"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Количество:</div>
+        <div class="col-8"><input type="text" name="count" id="count" /></div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"><input type="submit" value="Пополнить" class="btn btnprimary" /></div>
+    </div>
+</form>
