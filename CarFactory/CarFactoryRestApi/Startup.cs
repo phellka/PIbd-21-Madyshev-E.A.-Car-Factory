@@ -33,9 +33,13 @@ namespace CarFactoryRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ICarStorage, CarStorage>();
+            services.AddTransient<IWarehouseStorage, WarehouseStorage>();
+            services.AddTransient<IComponentStorage, ComponentStorage>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<ICarLogic, CarLogic>();
+            services.AddTransient<IWarehouseLogic, WarehouseLogic>();
+            services.AddTransient<IComponentLogic, ComponentLogic>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
