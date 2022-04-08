@@ -16,7 +16,7 @@ namespace CarFactoryDatabaseImplement.Implements
         public List<OrderViewModel> GetFullList()
         {
             using var context = new CarFactoryDatabase();
-            return context.Orders.Include(rec => rec.Car).Select(rec => new OrderViewModel {
+            return context.Orders.Include(rec => rec.Car).Include(rec => rec.Client).Include(rec => rec.Implementer).Select(rec => new OrderViewModel {
                 Id = rec.Id,
                 CarId = rec.CarId,
                 CarName = rec.Car.CarName,
@@ -26,7 +26,9 @@ namespace CarFactoryDatabaseImplement.Implements
                 DateCreate = rec.DateCreate,
                 DateImplement = rec.DateImplement,
                 ClientId = rec.ClientId,
-                ClientFCs = rec.Client.ClientFCs
+                ClientFCs = rec.Client.ClientFCs,
+                ImplementerId = rec.ImplementerId,
+                ImplementerFCs = rec.ImplementerId.HasValue? rec.Implementer.ImplementerFCs : string.Empty
             }).ToList();
         }
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
@@ -36,9 +38,12 @@ namespace CarFactoryDatabaseImplement.Implements
                 return null;
             }
             using var context = new CarFactoryDatabase();
-            return context.Orders.Include(rec => rec.Car).Include(rec => rec.Client).Where(rec => rec.CarId == model.CarId ||
-                (model.DateFrom.HasValue && model.DateTo.HasValue &&  rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) ||
-                model.ClientId.HasValue && rec.ClientId == model.ClientId).Select(rec => new OrderViewModel
+            return context.Orders.Include(rec => rec.Car).Include(rec => rec.Client).Include(rec => rec.Implementer)
+                .Where(rec => (rec.CarId == model.CarId) 
+                || (model.DateFrom.HasValue && model.DateTo.HasValue &&  rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo) 
+                || (model.ClientId.HasValue && rec.ClientId == model.ClientId)
+                || (model.SearchStatus.HasValue && model.SearchStatus.Value == rec.Status)
+                || (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status)).Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
                 CarId = rec.CarId,
@@ -49,7 +54,9 @@ namespace CarFactoryDatabaseImplement.Implements
                 DateCreate = rec.DateCreate,
                 DateImplement = rec.DateImplement,
                 ClientId = rec.ClientId,
-                ClientFCs = rec.Client.ClientFCs
+                ClientFCs = rec.Client.ClientFCs,
+                ImplementerId = rec.ImplementerId,
+                ImplementerFCs = rec.ImplementerId.HasValue? rec.Implementer.ImplementerFCs : String.Empty
             }).ToList();
         }
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -59,7 +66,8 @@ namespace CarFactoryDatabaseImplement.Implements
                 return null;
             }
             using var context = new CarFactoryDatabase();
-            var order = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            var order = context.Orders.Include(rec => rec.Car).Include(rec => rec.Client).Include(rec => rec.Implementer)
+                .FirstOrDefault(rec => rec.Id == model.Id);
             return order != null ? CreateModel(order, context) : null;
         }
         public void Insert(OrderBindingModel model)
@@ -71,7 +79,8 @@ namespace CarFactoryDatabaseImplement.Implements
         public void Update(OrderBindingModel model)
         {
             using var context = new CarFactoryDatabase();
-            var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            var element = context.Orders.Include(rec => rec.Car).Include(rec => rec.Client).Include(rec => rec.Implementer)
+                .FirstOrDefault(rec => rec.Id == model.Id);
             if (element == null)
             {
                 throw new Exception("Элемент не найден");
@@ -103,10 +112,13 @@ namespace CarFactoryDatabaseImplement.Implements
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId;
             return order;
         }
         public OrderViewModel CreateModel(Order order, CarFactoryDatabase context)
         {
+            var s1 = order.Client.ClientFCs;
+            string s2 = context.Implementers.FirstOrDefault(rec => rec.Id == order.ImplementerId)?.ImplementerFCs;
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -118,7 +130,9 @@ namespace CarFactoryDatabaseImplement.Implements
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 ClientId = order.ClientId,
-                ClientFCs = order.Client.ClientFCs
+                ClientFCs = order.Client.ClientFCs,
+                ImplementerId = order.ImplementerId,
+                ImplementerFCs = order.ImplementerId.HasValue ? order.Implementer.ImplementerFCs : String.Empty
             };
         }
     }

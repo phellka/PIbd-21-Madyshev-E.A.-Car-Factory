@@ -18,10 +18,12 @@ namespace CarFactoryFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string CarFileName = "Car.xml";
         private readonly string ClientFileName = "Client.xml";
+        private readonly string ImplementerFileName = "Implementer.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Car> Cars { get; set; }
         public List<Client> Clients { get; set; }
+        public List<Implementer> Implementers { get; set; }
 
         private FileDataListSingleton()
         {
@@ -29,6 +31,7 @@ namespace CarFactoryFileImplement
             Orders = LoadOrders();
             Cars = LoadCars();
             Clients = LoadClients();
+            Implementers = LoadImplementers();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -44,6 +47,7 @@ namespace CarFactoryFileImplement
             SaveComponents();
             SaveCars();
             SaveClients();
+            SaveImplementers();
         }
         private List<Component> LoadComponents()
         {
@@ -72,18 +76,25 @@ namespace CarFactoryFileImplement
                 var xElements = xDocument.Root.Elements("Order").ToList();
                 OrderStatus status;
                 DateTime? dateImplement;
+                int? implementerId;
                 foreach (var elem in xElements)
                 {
                     Enum.TryParse<OrderStatus>(elem.Element("Status").Value, out status);
                     dateImplement = null;
+                    implementerId = null;
                     if (elem.Element("DateImplement").Value != "")
                     {
                         dateImplement = DateTime.Parse(elem.Element("DateImplement").Value);
+                    }
+                    if (elem.Element("ImplementerId").Value != "")
+                    {
+                        implementerId = Convert.ToInt32(elem.Element("ImplementerId").Value);
                     }
                     list.Add(new Order
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         CarId = Convert.ToInt32(elem.Element("CarId").Value),
+                        ImplementerId = implementerId,
                         ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
@@ -142,6 +153,26 @@ namespace CarFactoryFileImplement
             }
             return list;
         }
+        private List<Implementer> LoadImplementers()
+        {
+            var list = new List<Implementer>();
+            if (File.Exists(ImplementerFileName))
+            {
+                var xDocument = XDocument.Load(ImplementerFileName);
+                var xElements = xDocument.Root.Elements("Imlementer").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Implementer
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ImplementerFCs = elem.Attribute("ImplementerFCs").Value,
+                        PauseTime = Convert.ToInt32(elem.Attribute("PauseTime").Value),
+                        WorkingTime = Convert.ToInt32(elem.Attribute("WorkingTime").Value)
+                    });
+                }
+            }
+            return list;
+        }
         private void SaveComponents()
         {
             if (Components != null)
@@ -167,6 +198,7 @@ namespace CarFactoryFileImplement
                     xElement.Add(new XElement("Order",
                         new XAttribute("Id", order.Id),
                         new XElement("CarId", order.CarId),
+                        new XElement("ImplementerId", order.ImplementerId),
                         new XElement("ClientId", order.ClientId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
@@ -218,6 +250,20 @@ namespace CarFactoryFileImplement
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(ClientFileName);
             }
+        }
+        private void SaveImplementers()
+        {
+            var xElement = new XElement("Implementers");
+            foreach (var implementer in Implementers)
+            {
+                xElement.Add(new XElement("Implementer",
+                    new XAttribute("Id", implementer.Id),
+                    new XAttribute("ImplementerFCs", implementer.ImplementerFCs),
+                    new XAttribute("WorkingTime", implementer.WorkingTime),
+                    new XAttribute("PauseTime", implementer.PauseTime)));
+            }
+            var xDocument = new XDocument(xElement);
+            xDocument.Save(ImplementerFileName);
         }
     }
 }

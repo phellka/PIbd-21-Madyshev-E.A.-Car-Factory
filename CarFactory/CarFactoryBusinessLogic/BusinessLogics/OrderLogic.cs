@@ -60,7 +60,8 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 DateCreate = tempOrder.DateCreate,
                 DateImplement = tempOrder.DateImplement,
                 Status = tempOrder.Status,
-                ClientId = tempOrder.ClientId
+                ClientId = tempOrder.ClientId,
+                ImplementerId = model.ImplementerId
             });
         }
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -85,7 +86,8 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 DateCreate = tempOrder.DateCreate,
                 DateImplement = tempOrder.DateImplement,
                 Status = tempOrder.Status,
-                ClientId = tempOrder.ClientId
+                ClientId = tempOrder.ClientId,
+                ImplementerId = model.ImplementerId
             });
         }
         public void DeliveryOrder(ChangeStatusBindingModel model)
@@ -110,7 +112,8 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 DateCreate = tempOrder.DateCreate,
                 DateImplement = tempOrder.DateImplement,
                 Status = tempOrder.Status,
-                ClientId = tempOrder.ClientId
+                ClientId = tempOrder.ClientId,
+                ImplementerId = tempOrder.ImplementerId
             });
         }    
     }

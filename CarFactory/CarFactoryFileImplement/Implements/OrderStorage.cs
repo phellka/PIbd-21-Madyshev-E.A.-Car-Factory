@@ -29,7 +29,9 @@ namespace CarFactoryFileImplement.Implements
             }
             return source.Orders.Where(rec => rec.CarId == model.CarId ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue &&  rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-                || model.ClientId.HasValue && rec.ClientId == model.ClientId.Value).Select(CreateModel).ToList();
+                || (model.ClientId.HasValue && rec.ClientId == model.ClientId.Value)
+                || (model.SearchStatus.HasValue && model.SearchStatus.Value == rec.Status)
+                || (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status)).Select(CreateModel).ToList();
         }
         public OrderViewModel GetElement(OrderBindingModel model)
         {
@@ -77,6 +79,7 @@ namespace CarFactoryFileImplement.Implements
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId;
             return order;
         }
         public OrderViewModel CreateModel(Order order)
@@ -92,7 +95,9 @@ namespace CarFactoryFileImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ImplementerId = order.ImplementerId,
+                ImplementerFCs = source.Implementers.FirstOrDefault(rec => rec.Id == order.ImplementerId)?.ImplementerFCs
             };
         }
     }

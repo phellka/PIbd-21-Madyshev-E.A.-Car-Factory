@@ -37,7 +37,9 @@ namespace CarFactoryListImplement.Implemets
             {
                 if (order.CarId == model.CarId || (model.DateFrom.HasValue && model.DateTo.HasValue && 
                     order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
-                    || model.ClientId.HasValue && order.ClientId == model.ClientId.Value)
+                    || (model.ClientId.HasValue && order.ClientId == model.ClientId.Value)
+                    || (model.SearchStatus.HasValue && model.SearchStatus.Value == order.Status)
+                    || (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && model.Status == order.Status))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -109,6 +111,7 @@ namespace CarFactoryListImplement.Implemets
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId;
             return order;
         }
         public OrderViewModel CreateModel(Order order)
@@ -131,6 +134,15 @@ namespace CarFactoryListImplement.Implemets
                     break;
                 }
             }
+            string implementerFCs = string.Empty;
+            foreach(var implementer in source.Implementers)
+            {
+                if (implementer.Id == order.ImplementerId)
+                {
+                    implementerFCs = implementer.ImplementerFCs;
+                    break;
+                }
+            }
             return new OrderViewModel { 
                 Id = order.Id,
                 CarId = order.CarId,
@@ -141,7 +153,9 @@ namespace CarFactoryListImplement.Implemets
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 ClientId = order.ClientId,
-                ClientFCs = clientFCs
+                ClientFCs = clientFCs,
+                ImplementerId = order.ImplementerId,
+                ImplementerFCs = implementerFCs
             };
         }
     }

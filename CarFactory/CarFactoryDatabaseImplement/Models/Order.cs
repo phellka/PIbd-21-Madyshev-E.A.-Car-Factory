@@ -13,6 +13,8 @@ namespace CarFactoryDatabaseImplement.Models
         public int Id { get; set; }
         public int CarId { get; set; }
         public virtual Car Car { get; set; }
+        public int? ImplementerId { get; set; }
+        public virtual Implementer Implementer { get; set; }
         public int ClientId { get; set; }
         public virtual Client Client { get; set; }
         [Required]
