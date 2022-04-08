@@ -8,16 +8,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace CarFactoryWarehouseApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IConfiguration configuration;
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            this.configuration = configuration;
         }
 
         public IActionResult Index()
@@ -45,7 +47,7 @@ namespace CarFactoryWarehouseApp.Controllers
         {
             if (!string.IsNullOrEmpty(password))
             {
-                if (Program.Password != password)
+                if (configuration["Password"] != password)
                 {
                     throw new Exception("Неверный пароль");
                 }

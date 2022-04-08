@@ -12,7 +12,6 @@ namespace CarFactoryWarehouseApp
     public class Program
     {
         public static bool Autorized = false;
-        public static string Password = "password";
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
