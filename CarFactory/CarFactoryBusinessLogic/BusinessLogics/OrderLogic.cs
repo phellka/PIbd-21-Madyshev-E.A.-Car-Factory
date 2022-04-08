@@ -50,25 +50,26 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             {
                 throw new Exception("Не найден заказ");
             }
-            if (tempOrder.Status != OrderStatus.Принят)
+            if (tempOrder.Status != OrderStatus.Принят && tempOrder.Status != OrderStatus.ТребуютсяМатериалы)
             {
-                throw new Exception("Статус заказа отличен от \"Принят\"");
+                throw new Exception("Статус заказа отличен от \"Принят\" или \"Требуются материалы\"");
             }
             CarViewModel tempCar = carStorage.GetElement(new CarBindingModel
             { Id = tempOrder.CarId });
+            tempOrder.Status = OrderStatus.Выполняется;
+            tempOrder.ImplementerId = model.ImplementerId;
+            tempOrder.DateImplement = DateTime.Now;
             try
             {
                 if (!warehouseStorage.WriteOffBalance(tempCar.CarComponents.ToDictionary(car => car.Key, car => car.Value.Item2 * tempOrder.Count)))
                 {
-                    throw new Exception("На складах недостаточно компонентов");
+                    tempOrder.Status = OrderStatus.ТребуютсяМатериалы;
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            tempOrder.Status = OrderStatus.Выполняется;
-            tempOrder.DateImplement = DateTime.Now;
             orderStorage.Update(new OrderBindingModel
             {
                 Id = tempOrder.Id,
@@ -79,7 +80,7 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 DateImplement = tempOrder.DateImplement,
                 Status = tempOrder.Status,
                 ClientId = tempOrder.ClientId,
-                ImplementerId = model.ImplementerId
+                ImplementerId = tempOrder.ImplementerId
             });
         }
         public void FinishOrder(ChangeStatusBindingModel model)

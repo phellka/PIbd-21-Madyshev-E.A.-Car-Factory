@@ -185,7 +185,7 @@ namespace CarFactoryDatabaseImplement.Implements
                 }
                 if (remainComponents.Count != 0)
                 {
-                    throw new Exception("На складах недостаточно компонентов");
+                    return false;
                 }
                 context.SaveChanges();
                 context.WarehouseComponents.RemoveRange(context.WarehouseComponents.Where(rec => rec.Count == 0).ToList());

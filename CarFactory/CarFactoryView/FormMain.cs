@@ -175,6 +175,7 @@ namespace CarFactoryView
         private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
         {
             workProcess.DoWork(implementerLogic, orderLogic);
+            LoadData();
         }
     }
 }
