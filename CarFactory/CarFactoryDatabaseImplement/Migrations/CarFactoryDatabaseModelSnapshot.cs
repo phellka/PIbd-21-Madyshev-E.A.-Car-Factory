@@ -297,14 +297,14 @@ namespace CarFactoryDatabaseImplement.Migrations
                     b.Navigation("WarehouseComponents");
                 });
 
-            modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Warehouse", b =>
-                {
-                    b.Navigation("WarehouseComponents");
-                });
-
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Implementer", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Warehouse", b =>
+                {
+                    b.Navigation("WarehouseComponents");
                 });
 #pragma warning restore 612, 618
         }
