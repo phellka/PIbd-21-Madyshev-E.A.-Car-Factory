@@ -1,7 +1,7 @@
 ﻿
 namespace CarFactoryView
 {
-    partial class FormComponentCar
+    partial class FormReportComponentCar
     {
         /// <summary>
         /// Required designer variable.

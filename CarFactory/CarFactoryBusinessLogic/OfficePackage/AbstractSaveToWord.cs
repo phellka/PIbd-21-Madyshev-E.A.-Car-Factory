@@ -38,8 +38,33 @@ namespace CarFactoryBusinessLogic.OfficePackage
             SaveWord(info);
 
         }
+        public void CreateDocWarehouse(WordInfo info)
+        {
+            CreateWord(info);
+            CreateParagraph(new WordParagraph
+            {
+                Texts = new List<(string, WordTextProperties)> { (info.Title, new WordTextProperties { Bold = true, Size = "24" }) },
+                TextProperties = new WordTextProperties
+                {
+                    Size = "24",
+                    JustificationType = WordJustificationType.Center
+                }
+            });
+            CreateTableWarehouses(new List<string>() { "Название", "ФИО ответственного", "Дата создания" });
+            foreach (var warehouse in info.Warehouses)
+            {
+                addRowTable(new List<string>() {
+                    warehouse.WarehouseName,
+                    warehouse.Responsible,
+                    warehouse.DateCreate.ToShortDateString()
+                });
+            }
+            SaveWord(info);
+        }
         protected abstract void CreateWord(WordInfo info);
         protected abstract void CreateParagraph(WordParagraph paragraph);
         protected abstract void SaveWord(WordInfo info);
+        protected abstract void CreateTableWarehouses(List<string> tableHeaderInfo);
+        protected abstract void addRowTable(List<string> tableRowInfo);
     }
 }

@@ -13,6 +13,7 @@ namespace CarFactoryListImplement.Implemets
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Car> Cars { get; set; }
+        public List<Warehouse> Warehouses { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
         private DataListSingleton()
@@ -22,6 +23,7 @@ namespace CarFactoryListImplement.Implemets
             Cars = new List<Car>();
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
+            Warehouses = new List<Warehouse>();
         }
         public static DataListSingleton GetInstance()
         {

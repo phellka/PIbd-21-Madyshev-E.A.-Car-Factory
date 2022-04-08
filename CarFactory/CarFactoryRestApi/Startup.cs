@@ -1,16 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CarFactoryContracts.StoragesContracts;
 using CarFactoryDatabaseImplement.Implements;
 using CarFactoryContracts.BusinessLogicsContracts;
@@ -33,10 +26,14 @@ namespace CarFactoryRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ICarStorage, CarStorage>();
+            services.AddTransient<IWarehouseStorage, WarehouseStorage>();
+            services.AddTransient<IComponentStorage, ComponentStorage>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<ICarLogic, CarLogic>();
-            services.AddControllers();
+            services.AddTransient<IWarehouseLogic, WarehouseLogic>();
+            services.AddTransient<IComponentLogic, ComponentLogic>();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarFactoryRestApi", Version = "v1" });

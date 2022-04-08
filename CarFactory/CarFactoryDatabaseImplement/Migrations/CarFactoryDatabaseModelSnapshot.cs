@@ -167,6 +167,54 @@ namespace CarFactoryDatabaseImplement.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Warehouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Responsible")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WarehouseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Warehouses");
+                });
+
+            modelBuilder.Entity("CarFactoryDatabaseImplement.Models.WarehouseComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WarehouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("WarehouseComponents");
+                });
+
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.CarComponent", b =>
                 {
                     b.HasOne("CarFactoryDatabaseImplement.Models.Car", "Car")
@@ -211,6 +259,25 @@ namespace CarFactoryDatabaseImplement.Migrations
                     b.Navigation("Implementer");
                 });
 
+            modelBuilder.Entity("CarFactoryDatabaseImplement.Models.WarehouseComponent", b =>
+                {
+                    b.HasOne("CarFactoryDatabaseImplement.Models.Component", "Component")
+                        .WithMany("WarehouseComponents")
+                        .HasForeignKey("ComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CarFactoryDatabaseImplement.Models.Warehouse", "Warehouse")
+                        .WithMany("WarehouseComponents")
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Component");
+
+                    b.Navigation("Warehouse");
+                });
+
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Car", b =>
                 {
                     b.Navigation("CarComponents");
@@ -226,6 +293,13 @@ namespace CarFactoryDatabaseImplement.Migrations
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Component", b =>
                 {
                     b.Navigation("CarComponents");
+
+                    b.Navigation("WarehouseComponents");
+                });
+
+            modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Warehouse", b =>
+                {
+                    b.Navigation("WarehouseComponents");
                 });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Implementer", b =>
