@@ -143,6 +143,14 @@ namespace CarFactoryClientApp.Controllers
             APIClient.GetRequest<CarViewModel>($"api/main/getcar?carId={car}");
             return count * prod.Price;
         }
-
+        public IActionResult Messages()
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIClient.GetRequest<List<MessageInfoViewModel>>
+                ($"api/main/GetMessages?clientId={Program.Client.Id}"));
+        }
     }
 }

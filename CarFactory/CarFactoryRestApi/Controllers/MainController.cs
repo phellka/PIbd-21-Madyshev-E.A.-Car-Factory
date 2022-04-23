@@ -13,10 +13,12 @@ namespace CarFactoryRestApi.Controllers
     {
         private readonly IOrderLogic order;
         private readonly ICarLogic car;
-        public MainController(IOrderLogic order, ICarLogic car)
+        private readonly IMessageInfoLogic message;
+        public MainController(IOrderLogic order, ICarLogic car, IMessageInfoLogic message)
         {
             this.order = order;
             this.car = car;
+            this.message = message;
         }
         [HttpGet]
         public List<CarViewModel> GetCarList() => car.Read(null)?.ToList();
@@ -24,6 +26,8 @@ namespace CarFactoryRestApi.Controllers
         public CarViewModel GetCar(int carId) => car.Read(new CarBindingModel { Id = carId })?[0];
         [HttpGet]
         public List<OrderViewModel> GetOrders(int clientId) => order.Read(new OrderBindingModel { ClientId = clientId });
+        [HttpGet]
+        public List<MessageInfoViewModel> GetMessages(int clientId) => message.Read(new MessageInfoBindingModel { ClientId = clientId });
         [HttpPost]
         public void CreateOrder(CreateOrderBindingModel model) =>
         order.CreateOrder(model);

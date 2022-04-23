@@ -138,5 +138,11 @@ namespace CarFactoryView
         {
             workProcess.DoWork(implementerLogic, orderLogic);
         }
+
+        private void письмаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormMessages>();
+            form.ShowDialog();
+        }
     }
 }
