@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CarFactoryContracts.BindingModels;
 using CarFactoryContracts.BusinessLogicsContracts;
@@ -16,10 +17,15 @@ namespace CarFactoryBusinessLogic.BusinessLogics
         private readonly AbstractMailWorker mailWorker;
         private readonly IClientStorage clientStorage;
         public OrderLogic(IOrderStorage orderStorage, AbstractMailWorker mailWorker, IClientStorage clientStorage)
+        private readonly IWarehouseStorage warehouseStorage;
+        private readonly ICarStorage carStorage;
+        public OrderLogic(IOrderStorage orderStorage, IWarehouseStorage warehouseStorage, ICarStorage carStorage)
         {
             this.orderStorage = orderStorage;
             this.mailWorker = mailWorker;
             this.clientStorage = clientStorage;
+            this.warehouseStorage = warehouseStorage;
+            this.carStorage = carStorage;
         }
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
@@ -55,12 +61,26 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             {
                 throw new Exception("Не найден заказ");
             }
-            if (tempOrder.Status != OrderStatus.Принят)
+            if (tempOrder.Status != OrderStatus.Принят && tempOrder.Status != OrderStatus.ТребуютсяМатериалы)
             {
-                throw new Exception("Статус заказа отличен от \"Принят\"");
+                throw new Exception("Статус заказа отличен от \"Принят\" или \"Требуются материалы\"");
             }
+            CarViewModel tempCar = carStorage.GetElement(new CarBindingModel
+            { Id = tempOrder.CarId });
             tempOrder.Status = OrderStatus.Выполняется;
+            tempOrder.ImplementerId = model.ImplementerId;
             tempOrder.DateImplement = DateTime.Now;
+            try
+            {
+                if (!warehouseStorage.WriteOffBalance(tempCar.CarComponents.ToDictionary(car => car.Key, car => car.Value.Item2 * tempOrder.Count)))
+                {
+                    tempOrder.Status = OrderStatus.ТребуютсяМатериалы;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             orderStorage.Update(new OrderBindingModel
             {
                 Id = tempOrder.Id,
@@ -71,7 +91,7 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 DateImplement = tempOrder.DateImplement,
                 Status = tempOrder.Status,
                 ClientId = tempOrder.ClientId,
-                ImplementerId = model.ImplementerId
+                ImplementerId = tempOrder.ImplementerId
             });
             mailWorker.MailSendAsync(new MailSendInfoBindingModel
             {

@@ -12,11 +12,11 @@ using CarFactoryContracts.BusinessLogicsContracts;
 
 namespace CarFactoryView
 {
-    public partial class FormComponentCar : Form
+    public partial class FormReportComponentCar : Form
     {
         private readonly IReportLogic logic;
 
-        public FormComponentCar(IReportLogic logic)
+        public FormReportComponentCar(IReportLogic logic)
         {
             InitializeComponent();
             this.logic = logic;

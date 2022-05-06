@@ -20,11 +20,13 @@ namespace CarFactoryFileImplement
         private readonly string ClientFileName = "Client.xml";
         private readonly string ImplementerFileName = "Implementer.xml";
         private readonly string MessageFileName = "Message.xml";
+        private readonly string WarehouseFileName = "Warehouse.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Car> Cars { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
+        public List<Warehouse> Warehouses { get; set; }
         public List<MessageInfo> Messages { get; set; }
 
         private FileDataListSingleton()
@@ -35,6 +37,7 @@ namespace CarFactoryFileImplement
             Clients = LoadClients();
             Implementers = LoadImplementers();
             Messages = LoadMessages();
+            Warehouses = LoadWarehouses();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -52,6 +55,7 @@ namespace CarFactoryFileImplement
             SaveClients();
             SaveImplementers();
             SaveMessages();
+            SaveWarehouses();
         }
         private List<Component> LoadComponents()
         {
@@ -132,6 +136,34 @@ namespace CarFactoryFileImplement
                         CarName = elem.Element("CarName").Value,
                         Price = Convert.ToDecimal(elem.Element("Price").Value),
                         CarComponents = carComp
+                    });
+                }
+            }
+            return list;
+        }
+        private List<Warehouse> LoadWarehouses()
+        {
+            var list = new List<Warehouse>();
+            if (File.Exists(WarehouseFileName))
+            {
+                var xDocument = XDocument.Load(WarehouseFileName);
+                var xElements = xDocument.Root.Elements("Warehouse").ToList();
+                foreach (var elem in xElements)
+                {
+                    var warComp = new Dictionary<int, int>();
+                    foreach (var component in
+                        elem.Element("WarehouseComponents").Elements("WarehouseComponent").ToList())
+                    {
+                        warComp.Add(Convert.ToInt32(component.Element("Key").Value),
+                            Convert.ToInt32(component.Element("Value").Value));
+                    }
+                    list.Add(new Warehouse
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        WarehouseName = elem.Element("WarehouseName").Value,
+                        Responsible = elem.Element("Responsible").Value,
+                        DateCreate = DateTime.Parse(elem.Element("DateCreate").Value),
+                        WarehouseComponents = warComp
                     });
                 }
             }
@@ -296,6 +328,31 @@ namespace CarFactoryFileImplement
             }
             var xDocument = new XDocument(xElement);
             xDocument.Save(ImplementerFileName);
+        }
+        private void SaveWarehouses()
+        {
+            if (Warehouses != null)
+            {
+                var xElement = new XElement("Warehouses");
+                foreach (var warehouse in Warehouses)
+                {
+                    var compElement = new XElement("WarehouseComponents");
+                    foreach (var component in warehouse.WarehouseComponents)
+                    {
+                        compElement.Add(new XElement("WarehouseComponent",
+                            new XElement("Key", component.Key),
+                            new XElement("Value", component.Value)));
+                    }
+                    xElement.Add(new XElement("Warehouse",
+                        new XAttribute("Id", warehouse.Id),
+                        new XElement("WarehouseName", warehouse.WarehouseName),
+                        new XElement("Responsible", warehouse.Responsible),
+                        new XElement("DateCreate", warehouse.DateCreate),
+                        compElement));
+                }
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(WarehouseFileName);
+            }
         }
         private void SaveMessages()
         {

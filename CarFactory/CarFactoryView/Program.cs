@@ -60,6 +60,8 @@ namespace CarFactoryView
                 HierarchicalLifetimeManager());
             currentContainer.RegisterType<ICarStorage, CarStorage>(new
                 HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IWarehouseStorage, WarehouseStorage>(new
+                HierarchicalLifetimeManager());
             currentContainer.RegisterType<IClientStorage, ClientStorage>(new
                 HierarchicalLifetimeManager());
             currentContainer.RegisterType<IImplementerStorage, ImplementerStorage>(new
@@ -91,6 +93,8 @@ namespace CarFactoryView
             currentContainer.RegisterType<AbstractMailWorker, MailKitWorker>(new 
                 SingletonLifetimeManager());
 
+            currentContainer.RegisterType<IWarehouseLogic, WarehouseLogic>(new
+                HierarchicalLifetimeManager());
             return currentContainer;
         }
         private static void MailCheck(object obj) => container.Resolve<AbstractMailWorker>().MailCheck();
