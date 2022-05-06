@@ -22,292 +22,292 @@ namespace CarFactoryDatabaseImplement.Migrations
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Car", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CarName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CarName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Cars");
-                });
+                b.ToTable("Cars");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.CarComponent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
+                b.Property<int>("CarId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("ComponentId")
-                        .HasColumnType("int");
+                b.Property<int>("ComponentId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                b.Property<int>("Count")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("CarId");
+                b.HasIndex("CarId");
 
-                    b.HasIndex("ComponentId");
+                b.HasIndex("ComponentId");
 
-                    b.ToTable("CarComponents");
-                });
+                b.ToTable("CarComponents");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Client", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClientFCs")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClientFCs")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Login")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Password")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Clients");
-                });
+                b.ToTable("Clients");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Component", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ComponentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ComponentName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Components");
-                });
+                b.ToTable("Components");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Implementer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ImplementerFCs")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ImplementerFCs")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PauseTime")
-                        .HasColumnType("int");
+                b.Property<int>("PauseTime")
+                    .HasColumnType("int");
 
-                    b.Property<int>("WorkingTime")
-                        .HasColumnType("int");
+                b.Property<int>("WorkingTime")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Implementers");
-                });
+                b.ToTable("Implementers");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
+                b.Property<int>("CarId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
+                b.Property<int>("ClientId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                b.Property<int>("Count")
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("DateCreate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("DateCreate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateImplement")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime?>("DateImplement")
+                    .HasColumnType("datetime2");
 
-                    b.Property<int?>("ImplementerId")
-                        .HasColumnType("int");
+                b.Property<int?>("ImplementerId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                b.Property<int>("Status")
+                    .HasColumnType("int");
 
-                    b.Property<decimal>("Sum")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Sum")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("CarId");
+                b.HasIndex("CarId");
 
-                    b.HasIndex("ClientId");
+                b.HasIndex("ClientId");
 
-                    b.HasIndex("ImplementerId");
+                b.HasIndex("ImplementerId");
 
-                    b.ToTable("Orders");
-                });
+                b.ToTable("Orders");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Warehouse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateCreate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("DateCreate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("Responsible")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Responsible")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("WarehouseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("WarehouseName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Warehouses");
-                });
+                b.ToTable("Warehouses");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.WarehouseComponent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ComponentId")
-                        .HasColumnType("int");
+                b.Property<int>("ComponentId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                b.Property<int>("Count")
+                    .HasColumnType("int");
 
-                    b.Property<int>("WarehouseId")
-                        .HasColumnType("int");
+                b.Property<int>("WarehouseId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ComponentId");
+                b.HasIndex("ComponentId");
 
-                    b.HasIndex("WarehouseId");
+                b.HasIndex("WarehouseId");
 
-                    b.ToTable("WarehouseComponents");
-                });
+                b.ToTable("WarehouseComponents");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.CarComponent", b =>
-                {
-                    b.HasOne("CarFactoryDatabaseImplement.Models.Car", "Car")
-                        .WithMany("CarComponents")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("CarFactoryDatabaseImplement.Models.Car", "Car")
+                    .WithMany("CarComponents")
+                    .HasForeignKey("CarId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("CarFactoryDatabaseImplement.Models.Component", "Component")
-                        .WithMany("CarComponents")
-                        .HasForeignKey("ComponentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("CarFactoryDatabaseImplement.Models.Component", "Component")
+                    .WithMany("CarComponents")
+                    .HasForeignKey("ComponentId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Car");
+                b.Navigation("Car");
 
-                    b.Navigation("Component");
-                });
+                b.Navigation("Component");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Order", b =>
-                {
-                    b.HasOne("CarFactoryDatabaseImplement.Models.Car", "Car")
-                        .WithMany("Orders")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("CarFactoryDatabaseImplement.Models.Car", "Car")
+                    .WithMany("Orders")
+                    .HasForeignKey("CarId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("CarFactoryDatabaseImplement.Models.Client", "Client")
-                        .WithMany("Orders")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("CarFactoryDatabaseImplement.Models.Client", "Client")
+                    .WithMany("Orders")
+                    .HasForeignKey("ClientId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("CarFactoryDatabaseImplement.Models.Implementer", "Implementer")
-                        .WithMany("Orders")
-                        .HasForeignKey("ImplementerId");
+                b.HasOne("CarFactoryDatabaseImplement.Models.Implementer", "Implementer")
+                    .WithMany("Orders")
+                    .HasForeignKey("ImplementerId");
 
-                    b.Navigation("Car");
+                b.Navigation("Car");
 
-                    b.Navigation("Client");
+                b.Navigation("Client");
 
-                    b.Navigation("Implementer");
-                });
+                b.Navigation("Implementer");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.WarehouseComponent", b =>
-                {
-                    b.HasOne("CarFactoryDatabaseImplement.Models.Component", "Component")
-                        .WithMany("WarehouseComponents")
-                        .HasForeignKey("ComponentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("CarFactoryDatabaseImplement.Models.Component", "Component")
+                    .WithMany("WarehouseComponents")
+                    .HasForeignKey("ComponentId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("CarFactoryDatabaseImplement.Models.Warehouse", "Warehouse")
-                        .WithMany("WarehouseComponents")
-                        .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("CarFactoryDatabaseImplement.Models.Warehouse", "Warehouse")
+                    .WithMany("WarehouseComponents")
+                    .HasForeignKey("WarehouseId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Component");
+                b.Navigation("Component");
 
-                    b.Navigation("Warehouse");
-                });
+                b.Navigation("Warehouse");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Car", b =>
-                {
-                    b.Navigation("CarComponents");
+            {
+                b.Navigation("CarComponents");
 
-                    b.Navigation("Orders");
-                });
+                b.Navigation("Orders");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Client", b =>
-                {
-                    b.Navigation("Orders");
-                });
+            {
+                b.Navigation("Orders");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Component", b =>
-                {
-                    b.Navigation("CarComponents");
+            {
+                b.Navigation("CarComponents");
 
-                    b.Navigation("WarehouseComponents");
-                });
+                b.Navigation("WarehouseComponents");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Implementer", b =>
-                {
-                    b.Navigation("Orders");
-                });
+            {
+                b.Navigation("Orders");
+            });
 
             modelBuilder.Entity("CarFactoryDatabaseImplement.Models.Warehouse", b =>
-                {
-                    b.Navigation("WarehouseComponents");
-                });
+            {
+                b.Navigation("WarehouseComponents");
+            });
 #pragma warning restore 612, 618
         }
     }

@@ -16,14 +16,7 @@ namespace CarFactoryDatabaseImplement.Implements
         {
             using var context = new CarFactoryDatabase();
             return context.Messages
-                .Select(rec => new MessageInfoViewModel
-                {
-                    MessageId = rec.MessageId,
-                    SenderName = rec.SenderName,
-                    DateDelivery = rec.DateDelivery,
-                    Subject = rec.Subject,
-                    Body = rec.Body
-                }).ToList();
+                .Select(CreateModel).ToList();
         }
         public List<MessageInfoViewModel> GetFilteredList(MessageInfoBindingModel model)
         {
@@ -32,16 +25,27 @@ namespace CarFactoryDatabaseImplement.Implements
                 return null;
             }
             using var context = new CarFactoryDatabase();
+            if (model.ToSkip.HasValue && model.ToTake.HasValue && !model.ClientId.HasValue)
+            {
+                return context.Messages.Skip((int)model.ToSkip).Take((int)model.ToTake)
+                .Select(CreateModel).ToList();
+            }
             return context.Messages.Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) || 
                 (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
-                .Select(rec => new MessageInfoViewModel
-                {
-                    MessageId = rec.MessageId,
-                    SenderName = rec.SenderName,
-                    DateDelivery = rec.DateDelivery,
-                    Subject = rec.Subject,
-                    Body = rec.Body
-                }).ToList();
+                .Skip(model.ToSkip ?? 0)
+                .Take(model.ToTake ?? context.Messages.Count())
+                .Select(CreateModel)
+                .ToList();
+        }
+        public MessageInfoViewModel GetElement(MessageInfoBindingModel model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            using var context = new CarFactoryDatabase();
+            var message = context.Messages.FirstOrDefault(rec => rec.MessageId == model.MessageId);
+            return message != null ? CreateModel(message) : null;
         }
         public void Insert(MessageInfoBindingModel model)
         {
@@ -58,10 +62,55 @@ namespace CarFactoryDatabaseImplement.Implements
                 SenderName = model.FromMailAddress,
                 DateDelivery = model.DateDelivery,
                 Subject = model.Subject,
-                Body = model.Body
+                Body = model.Body,
+                Viewed = model.Viewed
             });
             context.SaveChanges();
         }
-
+        public void Update(MessageInfoBindingModel model)
+        {
+            using var context = new CarFactoryDatabase();
+            using var transaction = context.Database.BeginTransaction();
+            try
+            {
+                var element = context.Messages.FirstOrDefault(rec => rec.MessageId == model.MessageId);
+                if (element == null)
+                {
+                    throw new Exception("Элемент не найден");
+                }
+                CreateModel(model, element);
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
+        }
+        private MessageInfoViewModel CreateModel(MessageInfo model)
+        {
+            return new MessageInfoViewModel
+            {
+                MessageId = model.MessageId,
+                SenderName = model.SenderName,
+                DateDelivery = model.DateDelivery,
+                Subject = model.Subject,
+                Body = model.Body,
+                Viewed = model.Viewed,
+                ReplyText = model.ReplyText
+            };
+        }
+        private static MessageInfo CreateModel(MessageInfoBindingModel model, MessageInfo message)
+        {
+            message.MessageId = model.MessageId;
+            message.ClientId = model.ClientId;
+            message.Subject = model.Subject;
+            message.Body = model.Body;
+            message.DateDelivery = model.DateDelivery;
+            message.ReplyText = model.ReplyText;
+            message.Viewed = model.Viewed;
+            return message;
+        }
     }
 }

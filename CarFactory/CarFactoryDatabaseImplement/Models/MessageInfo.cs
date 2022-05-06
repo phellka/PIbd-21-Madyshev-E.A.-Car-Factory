@@ -17,6 +17,8 @@ namespace CarFactoryDatabaseImplement.Models
         public DateTime DateDelivery { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public bool Viewed { get; set; }
+        public string ReplyText { get; set; }
         public virtual Client Client { get; set; }
     }
 }

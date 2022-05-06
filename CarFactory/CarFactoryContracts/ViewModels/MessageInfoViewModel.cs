@@ -18,6 +18,10 @@ namespace CarFactoryContracts.ViewModels
         public string Subject { get; set; }
         [DisplayName("Текст")]
         public string Body { get; set; }
+        [DisplayName("Прочитано")]
+        public bool Viewed { get; set; }
+        [DisplayName("Ответ")]
+        public string ReplyText { get; set; }
 
     }
 }

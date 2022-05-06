@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarFactoryDatabaseImplement.Migrations
 {
-    public partial class AddEmails : Migration
+    public partial class AddMails : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

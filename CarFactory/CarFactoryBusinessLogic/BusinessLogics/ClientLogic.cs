@@ -28,7 +28,7 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             {
                 return clientStorage.GetFullList();
             }
-            if (model.Id.HasValue)
+            if (model.Id.HasValue || !string.IsNullOrEmpty(model.Login))
             {
                 return new List<ClientViewModel> { clientStorage.GetElement(model) };
             }

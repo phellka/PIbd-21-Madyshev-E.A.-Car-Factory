@@ -12,6 +12,8 @@ namespace CarFactoryContracts.StoragesContracts
     {
         List<MessageInfoViewModel> GetFullList();
         List<MessageInfoViewModel> GetFilteredList(MessageInfoBindingModel model);
+        MessageInfoViewModel GetElement(MessageInfoBindingModel model);
         void Insert(MessageInfoBindingModel model);
+        void Update(MessageInfoBindingModel model);
     }
 }

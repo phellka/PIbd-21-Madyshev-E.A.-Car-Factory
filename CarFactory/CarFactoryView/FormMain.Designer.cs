@@ -98,9 +98,8 @@ namespace CarFactoryView
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
-            this.отчетыToolStripMenuItem,
             this.запускРаботToolStripMenuItem,
-            this.письмаToolStripMenuItem});
+            this.письмаToolStripMenuItem,
             this.запускРаботToolStripMenuItem,
             this.пополнениеСкладаToolStripMenuItem,
             this.отчетыToolStripMenuItem});

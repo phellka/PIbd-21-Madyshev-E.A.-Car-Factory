@@ -14,6 +14,7 @@ namespace CarFactoryRestApi.Controllers
         private readonly IOrderLogic order;
         private readonly ICarLogic car;
         private readonly IMessageInfoLogic message;
+        private readonly int mailsOnPage = 2;
         public MainController(IOrderLogic order, ICarLogic car, IMessageInfoLogic message)
         {
             this.order = order;
@@ -27,7 +28,17 @@ namespace CarFactoryRestApi.Controllers
         [HttpGet]
         public List<OrderViewModel> GetOrders(int clientId) => order.Read(new OrderBindingModel { ClientId = clientId });
         [HttpGet]
-        public List<MessageInfoViewModel> GetMessages(int clientId) => message.Read(new MessageInfoBindingModel { ClientId = clientId });
+        public (List<MessageInfoViewModel>, bool) GetMessages(int clientId, int page)
+        {
+            var list = message.Read(new MessageInfoBindingModel
+            {
+                ClientId = clientId,
+                ToSkip = (page - 1) * mailsOnPage,
+                ToTake = mailsOnPage + 1
+            }).ToList();
+            var hasNext = !(list.Count() <= mailsOnPage);
+            return (list.Take(mailsOnPage).ToList(), hasNext);
+        }
         [HttpPost]
         public void CreateOrder(CreateOrderBindingModel model) =>
         order.CreateOrder(model);

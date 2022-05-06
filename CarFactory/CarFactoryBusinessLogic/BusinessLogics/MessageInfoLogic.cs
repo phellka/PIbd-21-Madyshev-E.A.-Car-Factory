@@ -23,11 +23,25 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             {
                 return messageInfoStorage.GetFullList();
             }
+            if (!string.IsNullOrEmpty(model.MessageId)) {
+                return new List<MessageInfoViewModel> { messageInfoStorage.GetElement(model) };
+            }
             return messageInfoStorage.GetFilteredList(model);
         }
         public void CreateOrUpdate(MessageInfoBindingModel model)
         {
-            messageInfoStorage.Insert(model);
+            var element = messageInfoStorage.GetElement(new MessageInfoBindingModel
+            {
+                MessageId = model.MessageId
+            });
+            if (element != null)
+            {
+                messageInfoStorage.Update(model);
+            }
+            else
+            {
+                messageInfoStorage.Insert(model);
+            }
         }
     }
 }

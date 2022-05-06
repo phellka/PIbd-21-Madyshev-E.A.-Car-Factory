@@ -16,10 +16,9 @@ namespace CarFactoryBusinessLogic.BusinessLogics
         private readonly IOrderStorage orderStorage;
         private readonly AbstractMailWorker mailWorker;
         private readonly IClientStorage clientStorage;
-        public OrderLogic(IOrderStorage orderStorage, AbstractMailWorker mailWorker, IClientStorage clientStorage)
         private readonly IWarehouseStorage warehouseStorage;
         private readonly ICarStorage carStorage;
-        public OrderLogic(IOrderStorage orderStorage, IWarehouseStorage warehouseStorage, ICarStorage carStorage)
+        public OrderLogic(IOrderStorage orderStorage, IWarehouseStorage warehouseStorage, ICarStorage carStorage, AbstractMailWorker mailWorker, IClientStorage clientStorage)
         {
             this.orderStorage = orderStorage;
             this.mailWorker = mailWorker;
