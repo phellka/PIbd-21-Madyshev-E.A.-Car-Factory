@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using CarFactoryContracts.Attributes;
 
 namespace CarFactoryContracts.ViewModels
 {
     public class ImplementerViewModel
     {
         public int Id { get; set; }
-        [DisplayName("ФИО исполнителя")]
+        [Column(title: "ФИО исполнителя", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ImplementerFCs { get; set; }
-        [DisplayName("Время работы исполнителя")]
+        [Column(title: "Время работы исполнителя", width: 150)]
         public int WorkingTime { get; set; }
-        [DisplayName("Время отдыха исполнителя")]
+        [Column(title: "Время отдыха исполнителя", width: 150)]
         public int PauseTime { get; set; }
     }
 }

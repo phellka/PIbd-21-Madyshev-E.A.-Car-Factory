@@ -22,12 +22,14 @@ namespace CarFactoryView
 
         private void FormMessages_Load(object sender, EventArgs e)
         {
-            var list = logic.Read(null);
-            if (list != null)
+            try
             {
-                dataGridViewMessages.DataSource = list;
-                dataGridViewMessages.Columns[0].Visible = false;
-                dataGridViewMessages.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                Program.ConfigGrid(logic.Read(null), dataGridViewMessages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
     }
