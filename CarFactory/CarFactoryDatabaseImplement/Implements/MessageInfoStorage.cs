@@ -31,7 +31,7 @@ namespace CarFactoryDatabaseImplement.Implements
                 .Select(CreateModel).ToList();
             }
             return context.Messages.Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) || 
-                (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
+                (!model.ClientId.HasValue && (rec.DateDelivery.Date == model.DateDelivery.Date || model.ToSkip.HasValue && model.ToTake.HasValue)))
                 .Skip(model.ToSkip ?? 0)
                 .Take(model.ToTake ?? context.Messages.Count())
                 .Select(CreateModel)
