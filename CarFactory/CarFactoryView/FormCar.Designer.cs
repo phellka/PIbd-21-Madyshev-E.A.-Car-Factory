@@ -39,11 +39,11 @@ namespace CarFactoryView
             this.buttonChange = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.ComponentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameComponent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ComponentCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.ComponentCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameComponent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ComponentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxComponents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -149,25 +149,6 @@ namespace CarFactoryView
             this.dataGridView.Size = new System.Drawing.Size(425, 150);
             this.dataGridView.TabIndex = 0;
             // 
-            // ComponentId
-            // 
-            this.ComponentId.HeaderText = "ComponentId";
-            this.ComponentId.Name = "ComponentId";
-            this.ComponentId.ReadOnly = true;
-            this.ComponentId.Visible = false;
-            // 
-            // NameComponent
-            // 
-            this.NameComponent.HeaderText = "Компонент";
-            this.NameComponent.Name = "NameComponent";
-            this.NameComponent.ReadOnly = true;
-            // 
-            // ComponentCount
-            // 
-            this.ComponentCount.HeaderText = "Количество";
-            this.ComponentCount.Name = "ComponentCount";
-            this.ComponentCount.ReadOnly = true;
-            // 
             // buttonSave
             // 
             this.buttonSave.Location = new System.Drawing.Point(403, 379);
@@ -187,6 +168,25 @@ namespace CarFactoryView
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // ComponentCount
+            // 
+            this.ComponentCount.HeaderText = "Количество";
+            this.ComponentCount.Name = "ComponentCount";
+            this.ComponentCount.ReadOnly = true;
+            // 
+            // NameComponent
+            // 
+            this.NameComponent.HeaderText = "Компонент";
+            this.NameComponent.Name = "NameComponent";
+            this.NameComponent.ReadOnly = true;
+            // 
+            // ComponentId
+            // 
+            this.ComponentId.HeaderText = "ComponentId";
+            this.ComponentId.Name = "ComponentId";
+            this.ComponentId.ReadOnly = true;
+            this.ComponentId.Visible = false;
             // 
             // FormCar
             // 

@@ -20,13 +20,16 @@ namespace CarFactoryView
         private readonly IReportLogic reportLogic;
         private readonly IWorkProcess workProcess;
         private readonly IImplementerLogic implementerLogic;
-        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, IWorkProcess workProcess, IImplementerLogic implementerLogic)
+        private readonly IBackUpLogic backUpLogic;
+        public FormMain(IOrderLogic orderLogic, IReportLogic reportLogic, IWorkProcess workProcess, 
+            IImplementerLogic implementerLogic, IBackUpLogic backUpLogic)
         {
             InitializeComponent();
             this.orderLogic = orderLogic;
             this.reportLogic = reportLogic;
             this.workProcess = workProcess;
             this.implementerLogic = implementerLogic;
+            this.backUpLogic = backUpLogic;
         }
 
 
@@ -38,16 +41,7 @@ namespace CarFactoryView
         {
             try
             {
-                var list = orderLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].Visible = false;
-                    dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(orderLogic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {
@@ -143,6 +137,26 @@ namespace CarFactoryView
         {
             var form = Program.Container.Resolve<FormMessages>();
             form.ShowDialog();
+        }
+
+        private void СделатьБекапToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (backUpLogic != null)
+                {
+                    var fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        backUpLogic.CreateBackUp(new BackUpSaveBinidngModel { FolderName = fbd.SelectedPath });
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using CarFactoryContracts.Attributes;
 
 namespace CarFactoryContracts.ViewModels
 {
     public class ClientViewModel
     {
         public int Id { get; set; }
-        [DisplayName("ФИО клиента")]
+        [Column(title: "ФИО клиента", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string FCs { get; set; }
-        [DisplayName("Логин клиента")]
+        [Column(title: "Логин клиента", width: 100)]
         public string Login { get; set; }
-        [DisplayName("Пароль клиента")]
+        [Column(title: "Пароль клиента", width: 100)]
         public string Password { get; set; }
     }
 }

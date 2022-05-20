@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using CarFactoryContracts.Attributes;
 
 namespace CarFactoryContracts.ViewModels
 {
     public class ComponentViewModel
     {
         public int Id { get; set; }
-        [DisplayName("Название компонента")]
+        [Column(title: "Название компонента", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ComponentName { get; set; }
     }
 }
