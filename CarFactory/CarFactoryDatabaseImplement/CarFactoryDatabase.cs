@@ -27,5 +27,6 @@ namespace CarFactoryDatabaseImplement
         public virtual DbSet<WarehouseComponent> WarehouseComponents { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Implementer> Implementers { get; set; }
+        public virtual DbSet<MessageInfo> Messages { get; set; }
     }
 }

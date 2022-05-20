@@ -1,13 +1,22 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using CarFactoryContracts.StoragesContracts;
 using CarFactoryDatabaseImplement.Implements;
 using CarFactoryContracts.BusinessLogicsContracts;
 using CarFactoryBusinessLogic.BusinessLogics;
+using CarFactoryBusinessLogic.MailWorker;
+using CarFactoryContracts.BindingModels;
 
 namespace CarFactoryRestApi
 {
@@ -28,9 +37,13 @@ namespace CarFactoryRestApi
             services.AddTransient<ICarStorage, CarStorage>();
             services.AddTransient<IWarehouseStorage, WarehouseStorage>();
             services.AddTransient<IComponentStorage, ComponentStorage>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<ICarLogic, CarLogic>();
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
+            services.AddSingleton<AbstractMailWorker, MailKitWorker>();
+            services.AddControllers();
             services.AddTransient<IWarehouseLogic, WarehouseLogic>();
             services.AddTransient<IComponentLogic, ComponentLogic>();
             services.AddControllers().AddNewtonsoftJson();
@@ -59,6 +72,16 @@ namespace CarFactoryRestApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            var mailSender = app.ApplicationServices.GetService<AbstractMailWorker>();
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = Configuration?.GetSection("MailLogin")?.Value.ToString(),
+                MailPassword = Configuration?.GetSection("MailPassword")?.Value.ToString(),
+                SmtpClientHost = Configuration?.GetSection("SmtpClientHost")?.Value.ToString(),
+                SmtpClientPort = Convert.ToInt32(Configuration?.GetSection("SmtpClientPort")?.Value.ToString()),
+                PopHost = Configuration?.GetSection("PopHost")?.Value.ToString(),
+                PopPort = Convert.ToInt32(Configuration?.GetSection("PopPort")?.Value.ToString())
             });
         }
     }

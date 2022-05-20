@@ -8,12 +8,16 @@ using CarFactoryContracts.BusinessLogicsContracts;
 using CarFactoryContracts.StoragesContracts;
 using CarFactoryContracts.ViewModels;
 using CarFactoryContracts.Enums;
+using System.Text.RegularExpressions;
 
 namespace CarFactoryBusinessLogic.BusinessLogics
 {
     public class ClientLogic : IClientLogic
     {
         private readonly IClientStorage clientStorage;
+        private readonly int passwordMaxLength = 50;
+        private readonly int passwordMinLength = 10;
+
         public ClientLogic(IClientStorage clientStorage)
         {
             this.clientStorage = clientStorage;
@@ -24,7 +28,7 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             {
                 return clientStorage.GetFullList();
             }
-            if (model.Id.HasValue)
+            if (model.Id.HasValue || !string.IsNullOrEmpty(model.Login))
             {
                 return new List<ClientViewModel> { clientStorage.GetElement(model) };
             }
@@ -36,6 +40,17 @@ namespace CarFactoryBusinessLogic.BusinessLogics
             if (element != null && element.Id != model.Id)
             {
                 throw new Exception("Уже есть клиент с таким логином");
+            }
+            if (!Regex.IsMatch(model.Login, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+                                            + "@"
+                                            + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$"))
+            {
+                throw new Exception("В качестве логина почта указана должна быть");
+            }
+            if (model.Password.Length > passwordMaxLength || model.Password.Length < passwordMinLength || !Regex.IsMatch(model.Password,
+                @"^((\w+\d+\W+)|(\w+\W+\d+)|(\d+\w+\W+)|(\d+\W+\w+)|(\W+\w+\d+)|(\W+\d+\w+))[\w\d\W]*$"))
+            {
+                throw new Exception($"Пароль длиной от {passwordMinLength} до { passwordMaxLength } должен быть и из цифр, букв и небуквенных символов должен состоять");
             }
             if (model.Id.HasValue)
             {

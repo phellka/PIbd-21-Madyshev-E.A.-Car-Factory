@@ -7,17 +7,22 @@ using CarFactoryContracts.BusinessLogicsContracts;
 using CarFactoryContracts.StoragesContracts;
 using CarFactoryContracts.ViewModels;
 using CarFactoryContracts.Enums;
+using CarFactoryBusinessLogic.MailWorker;
 
 namespace CarFactoryBusinessLogic.BusinessLogics
 {
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage orderStorage;
+        private readonly AbstractMailWorker mailWorker;
+        private readonly IClientStorage clientStorage;
         private readonly IWarehouseStorage warehouseStorage;
         private readonly ICarStorage carStorage;
-        public OrderLogic(IOrderStorage orderStorage, IWarehouseStorage warehouseStorage, ICarStorage carStorage)
+        public OrderLogic(IOrderStorage orderStorage, IWarehouseStorage warehouseStorage, ICarStorage carStorage, AbstractMailWorker mailWorker, IClientStorage clientStorage)
         {
             this.orderStorage = orderStorage;
+            this.mailWorker = mailWorker;
+            this.clientStorage = clientStorage;
             this.warehouseStorage = warehouseStorage;
             this.carStorage = carStorage;
         }
@@ -41,6 +46,11 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 ClientId = model.ClientId
             };
             orderStorage.Insert(tempOrder);
+            mailWorker.MailSendAsync(new MailSendInfoBindingModel { 
+                MailAddress = clientStorage.GetElement(new ClientBindingModel { Id = model.ClientId})?.Login,
+                Subject = "Создан новый заказ",
+                Text = $"Дата заказа: {DateTime.Now}, сумма заказа: {model.Sum}"
+            });
         }
         public void TakeOrder(ChangeStatusBindingModel model)
         {
@@ -82,6 +92,12 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 ClientId = tempOrder.ClientId,
                 ImplementerId = tempOrder.ImplementerId
             });
+            mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = clientStorage.GetElement(new ClientBindingModel { Id = tempOrder.ClientId })?.Login,
+                Subject = $"Смена статуса заказа№ {tempOrder.Id}",
+                Text = $"Статус изменен на: {OrderStatus.Выполняется}"
+            });
         }
         public void FinishOrder(ChangeStatusBindingModel model)
         {
@@ -108,6 +124,12 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 ClientId = tempOrder.ClientId,
                 ImplementerId = model.ImplementerId
             });
+            mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = clientStorage.GetElement(new ClientBindingModel { Id = tempOrder.ClientId })?.Login,
+                Subject = $"Смена статуса заказа№ {tempOrder.Id}",
+                Text = $"Статус изменен на: {OrderStatus.Готов}"
+            });
         }
         public void DeliveryOrder(ChangeStatusBindingModel model)
         {
@@ -133,6 +155,12 @@ namespace CarFactoryBusinessLogic.BusinessLogics
                 Status = tempOrder.Status,
                 ClientId = tempOrder.ClientId,
                 ImplementerId = tempOrder.ImplementerId
+            });
+            mailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = clientStorage.GetElement(new ClientBindingModel { Id = tempOrder.ClientId })?.Login,
+                Subject = $"Смена статуса заказа№ {tempOrder.Id}",
+                Text = $"Статус изменен на: {OrderStatus.Выдан}"
             });
         }    
     }

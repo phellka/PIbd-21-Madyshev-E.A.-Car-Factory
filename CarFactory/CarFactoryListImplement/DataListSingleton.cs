@@ -16,6 +16,7 @@ namespace CarFactoryListImplement.Implemets
         public List<Warehouse> Warehouses { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
+        public List<MessageInfo> Messages { get; set; }
         private DataListSingleton()
         {
             Components = new List<Component>();
@@ -24,6 +25,7 @@ namespace CarFactoryListImplement.Implemets
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
             Warehouses = new List<Warehouse>();
+            Messages = new List<MessageInfo>();
         }
         public static DataListSingleton GetInstance()
         {

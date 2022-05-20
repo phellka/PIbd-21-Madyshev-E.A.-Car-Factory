@@ -4,14 +4,16 @@ using CarFactoryDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarFactoryDatabaseImplement.Migrations
 {
     [DbContext(typeof(CarFactoryDatabase))]
-    partial class CarFactoryDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20220506084633_AddMails")]
+    partial class AddMails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,17 +141,11 @@ namespace CarFactoryDatabaseImplement.Migrations
                     b.Property<DateTime>("DateDelivery")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ReplyText")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SenderName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Viewed")
-                        .HasColumnType("bit");
 
                     b.HasKey("MessageId");
 
